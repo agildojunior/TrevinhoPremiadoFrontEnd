@@ -10,13 +10,18 @@ const Login = ({ setAuth }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log(username, password);
-            const response = await axiosInstance.post('/Usuarios/auth', { username, password });
+            const response = await axiosInstance.post('/Usuarios/auth', null, {
+                params: {
+                    username,
+                    password
+                }
+            });
+
             const { token, user } = response.data;
-            localStorage.setItem('token', token.token);
+            localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
             setAuth(true);
-            history('/home');
+            history('/home'); // Redireciona para a página home após o login
         } catch (error) {
             console.error('Login failed', error);
             alert('Invalid username or password');
