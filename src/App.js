@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import RoutesApp from './routes/RoutesApp';
+import Sidebar from './components/sidebar'; 
+import GlobalStyle from './styles/global';
 
 const App = () => {
     const [isAuth, setAuth] = useState(false);
@@ -11,7 +13,14 @@ const App = () => {
         }
     }, []);
 
-    return <RoutesApp isAuth={isAuth} setAuth={setAuth} />;
+    return (
+        <>
+            <GlobalStyle /> 
+            <Sidebar>
+                <RoutesApp isAuth={isAuth} setAuth={setAuth} />
+            </Sidebar>
+        </>
+    );
 };
 
 export default App;

@@ -14,7 +14,6 @@ const Home = ({ setAuth }) => {
 
     return (
         <div>
-            <h2>Página Inicial</h2>
             <p>Bem-vindo, {user.username}!</p>
             <p>Seu ID de usuário é: {user.id}</p>
             <button onClick={handleLogout}>Sair</button>
