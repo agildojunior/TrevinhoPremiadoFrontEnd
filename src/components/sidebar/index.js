@@ -17,6 +17,7 @@ const Sidebar = ({ children, setAuth }) => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setAuth(false);
+        navigate('/login');
     };
 
     const handleNavigation = (path) => {
@@ -74,12 +75,7 @@ const Sidebar = ({ children, setAuth }) => {
                     )}
                 </SidebarMenu>
                 <SidebarMenu>
-                <SidebarMenuItem
-                    onClick={() => {
-                        handleLogout();
-                        handleNavigation('/login');
-                    }}
-                ><MdExitToApp size={18} /> Sair</SidebarMenuItem>
+                  <SidebarMenuItem onClick={handleLogout}><MdExitToApp size={18} /> Sair</SidebarMenuItem>
                 </SidebarMenu>
             </SidebarContainer>
             <PageContent isOpen={isOpen}>

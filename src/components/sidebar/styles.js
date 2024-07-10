@@ -21,7 +21,7 @@ export const NavbarContent = styled.div`
   display: flex;
   align-items: center;
   padding: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* sombra sutil */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
 export const MenuIcon = styled.div`
