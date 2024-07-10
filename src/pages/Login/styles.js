@@ -16,7 +16,7 @@ export const FormLogin = styled.form`
     flex-direction: column;
     background-color: #fff;
     border-radius: 7px;
-    padding: 40px;
+    padding: 30px 40px 40px 40px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); 
     gap: 5px;
 `;
@@ -84,4 +84,10 @@ export const Button = styled.button`
     &:hover {
         transform: scale(1.05);
     }
+`;
+
+export const LogoImage = styled.img`
+    width: 100px;
+    height: auto;
+    align-self: center;
 `;

@@ -38,7 +38,7 @@ const Sidebar = ({ children, setAuth }) => {
     return (
         <>
             <SidebarContainer isOpen={isOpen}>
-                <MenuTitle><MdMarkunreadMailbox size={24}/> TrevoADM</MenuTitle>
+                <MenuTitle><MdMarkunreadMailbox size={24}/> ADM</MenuTitle>
                 <SidebarMenu>
                     <SidebarMenuTitle onClick={() => toggleMenu('paineis')}>
                         Painéis {menuOpen.paineis ? <MdArrowDropDown /> : <MdArrowRight />}

@@ -10,7 +10,7 @@ const RoutesApp = ({ isAuth, setAuth }) => {
             <Route path="/login" element={isAuth ? <Navigate to="/home" /> : <Login setAuth={setAuth} />} />
             <Route path="/home" element={isAuth ? <Home setAuth={setAuth} /> : <Navigate to="/login" />} />
             <Route path="/teste" element={isAuth ? <Teste setAuth={setAuth} /> : <Navigate to="/login" />} />
-            <Route path="/" element={<Navigate to={isAuth ? "/home" : "/login"} />} />
+            <Route path="*" element={<Navigate to={isAuth ? "/home" : "/login"} />} />
         </Routes>
     );
 };

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../axiosInstance';
-import { Page, FormLogin, H1, P, Label, Input, Anchor, Button } from './styles';
+import { Page, FormLogin, Label, Input, Button, LogoImage } from './styles'; 
+import logoImg from '../../assets/images/logo.png';
 
 const Login = ({ setAuth }) => {
     const [username, setUsername] = useState('');
@@ -25,16 +26,15 @@ const Login = ({ setAuth }) => {
             navigate('/home'); 
         } catch (error) {
             console.error('Login failed', error);
-            alert('Username ou Senha invalidos!');
+            alert('Username ou Senha inválidos!');
         }
     };
 
     return (
         <Page>
             <FormLogin onSubmit={handleSubmit}>
-                <H1>Login</H1>
-                <P>Preencha os campos com suas credenciais.</P>
-                <Label htmlFor="username">Username</Label>
+                <LogoImage src={logoImg} alt="Logo" />
+                <Label htmlFor="username">Usuário</Label>
                 <Input
                     type="text"
                     placeholder="Digite seu username"
@@ -50,7 +50,6 @@ const Login = ({ setAuth }) => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <Anchor href="/">Esqueci minha senha</Anchor>
                 <Button type="submit">Acessar</Button>
             </FormLogin>
         </Page>
