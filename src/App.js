@@ -5,14 +5,17 @@ import Sidebar from './components/sidebar';
 import GlobalStyle from './styles/global';
 
 const App = () => {
-    const [isAuth, setAuth] = useState(false);
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user'));
+    const [isAuth, setAuth] = useState(!!(token && user));
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
+        if (token && user) {
             setAuth(true);
+        } else {
+            setAuth(false);
         }
-    }, []);
+    }, [token, user]); 
 
     return (
         <Router>
