@@ -16,10 +16,14 @@ const App = () => {
 
     return (
         <Router>
-            <GlobalStyle />
-            <Sidebar>
+            <GlobalStyle /> 
+            {isAuth ? (
+                <Sidebar setAuth={setAuth}>
+                    <RoutesApp isAuth={isAuth} setAuth={setAuth} />
+                </Sidebar>
+            ) : (
                 <RoutesApp isAuth={isAuth} setAuth={setAuth} />
-            </Sidebar>
+            )}
         </Router>
     );
 };
