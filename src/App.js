@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import RoutesApp from './routes/RoutesApp';
 import Sidebar from './components/sidebar'; 
 import GlobalStyle from './styles/global';
@@ -14,12 +15,12 @@ const App = () => {
     }, []);
 
     return (
-        <>
-            <GlobalStyle /> 
+        <Router>
+            <GlobalStyle />
             <Sidebar>
                 <RoutesApp isAuth={isAuth} setAuth={setAuth} />
             </Sidebar>
-        </>
+        </Router>
     );
 };
 
