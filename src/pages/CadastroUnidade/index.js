@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../axiosInstance';
-import { CadastroForm, Input, Select, Button } from './styles';
+import { CadastroForm, Input, Select, Button, Dropdown, DropdownItem } from './styles';
 
 const CadastroUnidade = () => {
     const [cidade, setCidade] = useState('');
     const [estado, setEstado] = useState('');
-    const [Id_Pessoa, setId_Pessoa] = useState('');
+    const [idPessoa, setIdPessoa] = useState('');
     const [pessoas, setPessoas] = useState([]);
     const [filter, setFilter] = useState('');
     const [loading, setLoading] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
 
     useEffect(() => {
         const fetchPessoas = async () => {
@@ -28,17 +29,29 @@ const CadastroUnidade = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            await axiosInstance.post('/Unidades', { cidade, estado, Id_Pessoa });
+            await axiosInstance.post('/Unidades', { cidade, estado, idPessoa });
             alert('Unidade cadastrada com sucesso!');
             setCidade('');
             setEstado('');
-            setId_Pessoa('');
+            setIdPessoa('');
+            setFilter('');
         } catch (error) {
             console.error('Erro ao cadastrar unidade', error);
             alert('Erro ao cadastrar unidade');
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleFilterChange = (e) => {
+        setFilter(e.target.value);
+        setShowDropdown(true);
+    };
+
+    const handleOptionSelect = (pessoaId, pessoaNome) => {
+        setIdPessoa(pessoaId);
+        setFilter(pessoaNome);
+        setShowDropdown(false);
     };
 
     const filteredPessoas = pessoas.filter((pessoa) =>
@@ -65,13 +78,27 @@ const CadastroUnidade = () => {
             <Input
                 type="text"
                 value={filter}
-                onChange={(e) => setFilter(e.target.value)}
+                onChange={handleFilterChange}
                 placeholder="Filtrar responsável"
+                onFocus={() => setShowDropdown(true)}
             />
+            {showDropdown && filteredPessoas.length > 0 && (
+                <Dropdown>
+                    {filteredPessoas.slice(0, 5).map((pessoa) => (
+                        <DropdownItem
+                            key={pessoa.id}
+                            onClick={() => handleOptionSelect(pessoa.id, pessoa.nome)}
+                        >
+                            {pessoa.nome}
+                        </DropdownItem>
+                    ))}
+                </Dropdown>
+            )}
             <Select
-                value={Id_Pessoa}
-                onChange={(e) => setId_Pessoa(e.target.value)}
+                value={idPessoa}
+                onChange={(e) => setIdPessoa(e.target.value)}
                 required
+                style={{ display: 'none' }} // Esconder o select real
             >
                 <option value="">Responsável</option>
                 {filteredPessoas.map((pessoa) => (
