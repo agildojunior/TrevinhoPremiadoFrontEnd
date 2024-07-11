@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SidebarContainer, LogoImage, PageContent, NavbarContent, MenuIcon, NavbarTitle, MenuTitle, SidebarMenu, SidebarMenuItem, SidebarMenuTitle } from './styles';
-import { MdMenu, MdHome, MdWork, MdPerson, MdArrowRight, MdArrowDropDown, MdExitToApp } from 'react-icons/md'; // Importando MdExitToApp para o ícone de logout
+import { MdMenu, MdHome, MdWork, MdPerson, MdArrowRight, MdArrowDropDown, MdExitToApp } from 'react-icons/md';
 import logoImg from '../../assets/images/logo.png';
 
 const Sidebar = ({ children, setAuth }) => {
     const [isOpen, setIsOpen] = useState(true);
     const [menuOpen, setMenuOpen] = useState({
         paineis: false,
-        funcoes: false,
+        cadastro: false,
     });
 
     const navigate = useNavigate();
@@ -37,7 +37,7 @@ const Sidebar = ({ children, setAuth }) => {
 
     return (
         <>
-            <SidebarContainer isOpen={isOpen}>
+            <SidebarContainer $isOpen={isOpen}>
                 <MenuTitle><LogoImage src={logoImg} alt="Logo" /></MenuTitle>
                 <SidebarMenu>
                     <SidebarMenuTitle onClick={() => toggleMenu('paineis')}>
@@ -51,23 +51,22 @@ const Sidebar = ({ children, setAuth }) => {
                     )}
                 </SidebarMenu>
                 <SidebarMenu>
-                    <SidebarMenuTitle onClick={() => toggleMenu('funcoes')}>
-                        Funções {menuOpen.funcoes ? <MdArrowDropDown /> : <MdArrowRight />}
+                    <SidebarMenuTitle onClick={() => toggleMenu('cadastro')}>
+                        Cadastro {menuOpen.cadastro ? <MdArrowDropDown /> : <MdArrowRight />}
                     </SidebarMenuTitle>
-                    {menuOpen.funcoes && (
+                    {menuOpen.cadastro && (
                         <>
-                            <SidebarMenuItem><MdHome size={18} /> Finanças</SidebarMenuItem>
-                            <SidebarMenuItem><MdWork size={18} /> Teste</SidebarMenuItem>
-                            <SidebarMenuItem><MdPerson size={18} /> Perfil</SidebarMenuItem>
-                            <SidebarMenuItem><MdPerson size={18} /> Xablau</SidebarMenuItem>
+                            <SidebarMenuItem><MdHome size={18} /> Usuario</SidebarMenuItem>
+                            <SidebarMenuItem onClick={() => handleNavigation('/cadastroUnidade')}><MdWork size={18} /> Unidade</SidebarMenuItem>
+                            <SidebarMenuItem><MdPerson size={18} /> Cliente</SidebarMenuItem>
                         </>
                     )}
                 </SidebarMenu>
                 <SidebarMenu>
-                  <SidebarMenuItem onClick={handleLogout}><MdExitToApp size={18} /> Sair</SidebarMenuItem>
+                    <SidebarMenuItem onClick={handleLogout}><MdExitToApp size={18} /> Sair</SidebarMenuItem>
                 </SidebarMenu>
             </SidebarContainer>
-            <PageContent isOpen={isOpen}>
+            <PageContent $isOpen={isOpen}>
                 <NavbarContent>
                     <MenuIcon>
                         <MdMenu size={24} onClick={toggleSidebar} />

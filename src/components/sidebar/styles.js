@@ -3,11 +3,11 @@ import styled from 'styled-components';
 export const SidebarContainer = styled.div`
   width: 250px; 
   height: 100%; 
-  background-color: #123647;
+  background-color: #194e92;
   color: #ffffff; 
   position: fixed; 
   top: 0;
-  left: ${({ isOpen }) => (isOpen ? '0' : '-250px')};
+  left: ${({ $isOpen }) => ($isOpen ? '0' : '-250px')};
   transition: left 0.3s ease-in-out;
   padding-top: 20px;
   overflow-y: auto;
@@ -20,7 +20,7 @@ export const SidebarContainer = styled.div`
 `;
 
 export const PageContent = styled.div`
-  margin-left: ${({ isOpen }) => (isOpen ? '250px' : '0')};
+  margin-left: ${({ $isOpen }) => ($isOpen ? '250px' : '0')};
   transition: margin-left 0.3s ease-in-out;
 `;
 
@@ -53,28 +53,31 @@ export const SidebarMenu = styled.ul`
 `;
 
 export const SidebarMenuItem = styled.li`
-  color: #757f93;
+  color: #fff;
   padding: 8px;
   padding-left: 35px;
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
   &:hover {
-    color: #fff;
+    color: #bbb;
   }
 `;
 
 export const SidebarMenuTitle = styled.li`
-  color: #757f93;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
   padding-left: 25px;
-  padding-bottom: 5px;
+  padding-bottom: 3px;
   cursor: pointer;
   &:hover {
-    color: #fff;
+    color: #bbb;
   }
 `;
 
 export const LogoImage = styled.img`
-    width: 100px;
+    width: 150px;
     height: auto;
     align-self: center;
 `;

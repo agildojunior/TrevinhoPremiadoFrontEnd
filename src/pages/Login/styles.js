@@ -26,7 +26,7 @@ export const H1 = styled.h1`
     margin: 0;
     font-weight: 500;
     font-size: 2.3em;
-    color: #123647; 
+    color: #194e92; 
 `;
 
 export const P = styled.p`
@@ -39,7 +39,7 @@ export const P = styled.p`
 export const Label = styled.label`
     font-size: 14px;
     font-weight: 600;
-    color: #123647;
+    color: #194e92;
 `;
 
 export const Input = styled.input`
@@ -53,7 +53,7 @@ export const Input = styled.input`
     outline: none;
 
     &:focus {
-        border: 1px solid #123647;
+        border: 1px solid #194e92;
     }
 `;
 
@@ -65,12 +65,12 @@ export const Anchor = styled.a`
     transition: all linear 160ms;
 
     &:hover {
-        color: #123647; 
+        color: #194e92; 
     }
 `;
 
 export const Button = styled.button`
-    background-color: #123647; 
+    background-color: #194e92; 
     color: #fff;
     font-size: 14px;
     font-weight: 600;

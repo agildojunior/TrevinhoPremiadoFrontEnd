@@ -20,7 +20,7 @@ const Login = ({ setAuth }) => {
             });
 
             const { token, user } = response.data;
-            localStorage.setItem('token', token);
+            localStorage.setItem('token', JSON.stringify(token.token));
             localStorage.setItem('user', JSON.stringify(user));
             setAuth(true);
             navigate('/home'); 
