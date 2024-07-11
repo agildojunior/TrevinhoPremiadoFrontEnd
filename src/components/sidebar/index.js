@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SidebarContainer, PageContent, NavbarContent, MenuIcon, NavbarTitle, MenuTitle, SidebarMenu, SidebarMenuItem, SidebarMenuTitle } from './styles';
-import { MdMenu, MdMarkunreadMailbox, MdHome, MdWork, MdPerson, MdArrowRight, MdArrowDropDown, MdExitToApp } from 'react-icons/md'; // Importando MdExitToApp para o ícone de logout
+import { SidebarContainer, LogoImage, PageContent, NavbarContent, MenuIcon, NavbarTitle, MenuTitle, SidebarMenu, SidebarMenuItem, SidebarMenuTitle } from './styles';
+import { MdMenu, MdHome, MdWork, MdPerson, MdArrowRight, MdArrowDropDown, MdExitToApp } from 'react-icons/md'; // Importando MdExitToApp para o ícone de logout
+import logoImg from '../../assets/images/logo.png';
 
 const Sidebar = ({ children, setAuth }) => {
     const [isOpen, setIsOpen] = useState(true);
     const [menuOpen, setMenuOpen] = useState({
         paineis: false,
         funcoes: false,
-        configs: false
     });
 
     const navigate = useNavigate();
@@ -38,7 +38,7 @@ const Sidebar = ({ children, setAuth }) => {
     return (
         <>
             <SidebarContainer isOpen={isOpen}>
-                <MenuTitle><MdMarkunreadMailbox size={24}/> ADM</MenuTitle>
+                <MenuTitle><LogoImage src={logoImg} alt="Logo" /></MenuTitle>
                 <SidebarMenu>
                     <SidebarMenuTitle onClick={() => toggleMenu('paineis')}>
                         Painéis {menuOpen.paineis ? <MdArrowDropDown /> : <MdArrowRight />}
@@ -60,17 +60,6 @@ const Sidebar = ({ children, setAuth }) => {
                             <SidebarMenuItem><MdWork size={18} /> Teste</SidebarMenuItem>
                             <SidebarMenuItem><MdPerson size={18} /> Perfil</SidebarMenuItem>
                             <SidebarMenuItem><MdPerson size={18} /> Xablau</SidebarMenuItem>
-                        </>
-                    )}
-                </SidebarMenu>
-                <SidebarMenu>
-                    <SidebarMenuTitle onClick={() => toggleMenu('configs')}>
-                        Configs {menuOpen.configs ? <MdArrowDropDown /> : <MdArrowRight />}
-                    </SidebarMenuTitle>
-                    {menuOpen.configs && (
-                        <>
-                            <SidebarMenuItem><MdHome size={18} /> Home</SidebarMenuItem>
-                            <SidebarMenuItem><MdWork size={18} /> Teste</SidebarMenuItem>
                         </>
                     )}
                 </SidebarMenu>

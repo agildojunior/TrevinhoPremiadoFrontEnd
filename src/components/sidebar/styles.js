@@ -10,6 +10,13 @@ export const SidebarContainer = styled.div`
   left: ${({ isOpen }) => (isOpen ? '0' : '-250px')};
   transition: left 0.3s ease-in-out;
   padding-top: 20px;
+  overflow-y: auto;
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+  ::-webkit-scrollbar {
+    width: 0px;  
+    background: transparent;  
+  }
 `;
 
 export const PageContent = styled.div`
@@ -64,4 +71,10 @@ export const SidebarMenuTitle = styled.li`
   &:hover {
     color: #fff;
   }
+`;
+
+export const LogoImage = styled.img`
+    width: 100px;
+    height: auto;
+    align-self: center;
 `;
