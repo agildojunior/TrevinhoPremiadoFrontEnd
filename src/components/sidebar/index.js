@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { SidebarContainer, LogoImage, PageContent, NavbarContent, MenuIcon, NavbarTitle, MenuTitle, SidebarMenu, SidebarMenuItem, SidebarMenuTitle } from './styles';
 import { MdMenu, MdHome, MdWork, MdPerson, MdArrowRight, MdArrowDropDown, MdExitToApp } from 'react-icons/md';
 import logoImg from '../../assets/images/logo.png';
@@ -10,8 +10,33 @@ const Sidebar = ({ children, setAuth }) => {
         paineis: false,
         cadastro: false,
     });
+    const [navbarTitle, setNavbarTitle] = useState('Titulo da Navbar');
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        switch (location.pathname) {
+            case '/home':
+                setNavbarTitle('Inicio');
+                break;
+            case '/teste':
+                setNavbarTitle('Teste');
+                break;
+            case '/cadastroUnidade':
+                setNavbarTitle('Cadastro de Unidade');
+                break;
+            case '/cadastroUsuario':
+                setNavbarTitle('Cadastro de Usuário');
+                break;
+            case '/cadastroCliente':
+                setNavbarTitle('Cadastro de Cliente');
+                break;
+            default:
+                setNavbarTitle('Titulo da Navbar');
+                break;
+        }
+    }, [location.pathname]);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -45,7 +70,7 @@ const Sidebar = ({ children, setAuth }) => {
                     </SidebarMenuTitle>
                     {menuOpen.paineis && (
                         <>
-                            <SidebarMenuItem onClick={() => handleNavigation('/home')}><MdHome size={18} /> Home</SidebarMenuItem>
+                            <SidebarMenuItem onClick={() => handleNavigation('/home')}><MdHome size={18} /> Inicio</SidebarMenuItem>
                             <SidebarMenuItem onClick={() => handleNavigation('/teste')}><MdWork size={18} /> Teste</SidebarMenuItem>
                         </>
                     )}
@@ -56,9 +81,9 @@ const Sidebar = ({ children, setAuth }) => {
                     </SidebarMenuTitle>
                     {menuOpen.cadastro && (
                         <>
-                            <SidebarMenuItem><MdHome size={18} /> Usuario</SidebarMenuItem>
+                            <SidebarMenuItem onClick={() => handleNavigation('/cadastroUsuario')}><MdHome size={18} /> Usuário</SidebarMenuItem>
                             <SidebarMenuItem onClick={() => handleNavigation('/cadastroUnidade')}><MdWork size={18} /> Unidade</SidebarMenuItem>
-                            <SidebarMenuItem><MdPerson size={18} /> Cliente</SidebarMenuItem>
+                            <SidebarMenuItem onClick={() => handleNavigation('/cadastroCliente')}><MdPerson size={18} /> Cliente</SidebarMenuItem>
                         </>
                     )}
                 </SidebarMenu>
@@ -71,7 +96,7 @@ const Sidebar = ({ children, setAuth }) => {
                     <MenuIcon>
                         <MdMenu size={24} onClick={toggleSidebar} />
                     </MenuIcon>
-                    <NavbarTitle>Titulo da Navbar</NavbarTitle>
+                    <NavbarTitle>{navbarTitle}</NavbarTitle>
                 </NavbarContent>
                 <div style={{ margin: '20px' }}>{children}</div>
             </PageContent>
