@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../axiosInstance';
 import { Page, FormLogin, Label, Input, Button, LogoImage } from './styles'; 
 import logoImg from '../../assets/images/logo.png';
+import { toast } from 'react-toastify';
 
 const Login = ({ setAuth }) => {
     const [username, setUsername] = useState('');
@@ -25,8 +26,7 @@ const Login = ({ setAuth }) => {
             setAuth(true);
             navigate('/home'); 
         } catch (error) {
-            console.error('Login failed', error);
-            alert('Username ou Senha inválidos!');
+            toast.info('Username ou Senha inválidos!');
         }
     };
 

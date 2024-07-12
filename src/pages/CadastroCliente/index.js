@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axiosInstance from '../../axiosInstance';
 import { CadastroForm, Input, Button } from './styles';
+import { toast } from 'react-toastify';
 
 const CadastroCliente = () => {
     const [nome, setNome] = useState('');
@@ -22,14 +23,14 @@ const CadastroCliente = () => {
                 contato,
                 endereco
             });
-            alert('Cliente cadastrado com sucesso!');
+            toast.success('Cliente cadastrado com sucesso!');
             setNome('');
             setCpf('');
             setDtNascimento('');
             setContato('');
             setEndereco('');
         } catch (error) {
-            alert('Erro ao cadastrar cliente');
+            toast.error('Erro ao cadastrar cliente!');
         } finally {
             setLoading(false);
         }

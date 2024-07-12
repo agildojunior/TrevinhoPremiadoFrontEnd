@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../axiosInstance';
 import { CadastroForm, Input, Select, Button, Dropdown, DropdownItem } from './styles';
+import { toast } from 'react-toastify';
 
 const CadastroUnidade = () => {
     const [cidade, setCidade] = useState('');
@@ -30,14 +31,14 @@ const CadastroUnidade = () => {
         setLoading(true);
         try {
             await axiosInstance.post('/Unidades', { cidade, estado, id_Pessoa });
-            alert('Unidade cadastrada com sucesso!');
+            toast.success('Unidade cadastrada com sucesso!');
             setCidade('');
             setEstado('');
             setid_Pessoa('');
             setFilter('');
         } catch (error) {
             console.error('Erro ao cadastrar unidade', error);
-            alert('Erro ao cadastrar unidade');
+            toast.error('Erro ao cadastrar unidade!');
         } finally {
             setLoading(false);
         }

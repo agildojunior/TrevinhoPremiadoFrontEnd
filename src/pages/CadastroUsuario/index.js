@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../axiosInstance';
 import { CadastroForm, Input, Select, Button } from './styles';
+import { toast } from 'react-toastify';
+toast.success('Usuário cadastrado com sucesso!');
 
 const CadastroUsuario = () => {
     const [user, setUser] = useState('');
@@ -64,7 +66,7 @@ const CadastroUsuario = () => {
 
             console.log('Resposta do Servidor:', usuarioResponse);
 
-            alert('Usuário cadastrado com sucesso!');
+            toast.success('Usuário cadastrado com sucesso!');
             setUser('');
             setPassword('');
             setStatus(true);
@@ -77,7 +79,7 @@ const CadastroUsuario = () => {
             setEnderecoPessoa('');
         } catch (error) {
             console.error('Erro ao cadastrar usuário:', error);
-            alert('Erro ao cadastrar usuário');
+            toast.error('Erro ao cadastrar usuário!');
         } finally {
             setLoading(false);
         }

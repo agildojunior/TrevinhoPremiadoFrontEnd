@@ -3,6 +3,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import RoutesApp from './routes/RoutesApp';
 import Sidebar from './components/sidebar'; 
 import GlobalStyle from './styles/global';
+import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
     const token = localStorage.getItem('token');
@@ -27,6 +29,7 @@ const App = () => {
             ) : (
                 <RoutesApp isAuth={isAuth} setAuth={setAuth} />
             )}
+            <ToastContainer />
         </Router>
     );
 };
