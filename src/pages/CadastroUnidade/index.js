@@ -5,7 +5,7 @@ import { CadastroForm, Input, Select, Button, Dropdown, DropdownItem } from './s
 const CadastroUnidade = () => {
     const [cidade, setCidade] = useState('');
     const [estado, setEstado] = useState('');
-    const [idPessoa, setIdPessoa] = useState('');
+    const [id_Pessoa, setid_Pessoa] = useState('');
     const [pessoas, setPessoas] = useState([]);
     const [filter, setFilter] = useState('');
     const [loading, setLoading] = useState(false);
@@ -29,11 +29,11 @@ const CadastroUnidade = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            await axiosInstance.post('/Unidades', { cidade, estado, idPessoa });
+            await axiosInstance.post('/Unidades', { cidade, estado, id_Pessoa });
             alert('Unidade cadastrada com sucesso!');
             setCidade('');
             setEstado('');
-            setIdPessoa('');
+            setid_Pessoa('');
             setFilter('');
         } catch (error) {
             console.error('Erro ao cadastrar unidade', error);
@@ -49,7 +49,7 @@ const CadastroUnidade = () => {
     };
 
     const handleOptionSelect = (pessoaId, pessoaNome) => {
-        setIdPessoa(pessoaId);
+        setid_Pessoa(pessoaId);
         setFilter(pessoaNome);
         setShowDropdown(false);
     };
@@ -95,8 +95,8 @@ const CadastroUnidade = () => {
                 </Dropdown>
             )}
             <Select
-                value={idPessoa}
-                onChange={(e) => setIdPessoa(e.target.value)}
+                value={id_Pessoa}
+                onChange={(e) => setid_Pessoa(e.target.value)}
                 required
                 style={{ display: 'none' }} // Esconder o select real
             >
