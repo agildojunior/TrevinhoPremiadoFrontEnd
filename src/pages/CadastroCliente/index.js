@@ -14,10 +14,11 @@ const CadastroCliente = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            await axiosInstance.post('/Usuarios', {
+            const dt_Nascimento = new Date(dtNascimento).toISOString();
+            await axiosInstance.post('/Pessoas', {
                 nome,
                 cpf,
-                dt_Nascimento: dtNascimento,
+                dt_Nascimento,
                 contato,
                 endereco
             });
@@ -28,7 +29,6 @@ const CadastroCliente = () => {
             setContato('');
             setEndereco('');
         } catch (error) {
-            console.error('Erro ao cadastrar cliente', error);
             alert('Erro ao cadastrar cliente');
         } finally {
             setLoading(false);
