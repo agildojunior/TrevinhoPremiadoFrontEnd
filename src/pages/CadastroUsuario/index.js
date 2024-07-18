@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../axiosInstance';
 import { CadastroForm, Input, Select, Button } from './styles';
 import { toast } from 'react-toastify';
-toast.success('Usuário cadastrado com sucesso!');
 
 const CadastroUsuario = () => {
     const [user, setUser] = useState('');
