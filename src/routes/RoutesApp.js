@@ -7,20 +7,27 @@ import CadastroUnidade from '../pages/CadastroUnidade';
 import CadastroCliente from '../pages/CadastroCliente';
 import CadastroUsuario from '../pages/CadastroUsuario';
 import Vender from '../pages/Vender';
-import Vendidos from '../pages/Vendidos';
 
 const RoutesApp = ({ isAuth, setAuth }) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const isVendedor = user?.id_Nivel === 5;
+
     return (
         <Routes>
             <Route path="/login" element={isAuth ? <Navigate to="/home" /> : <Login setAuth={setAuth} />} />
-            <Route path="/home" element={isAuth ? <Home setAuth={setAuth} /> : <Navigate to="/login" />} />
-            <Route path="/cadastroUnidade" element={isAuth ? <CadastroUnidade setAuth={setAuth} /> : <Navigate to="/login" />} />
-            <Route path="/cadastroCliente" element={isAuth ? <CadastroCliente setAuth={setAuth} /> : <Navigate to="/login" />} />
-            <Route path="/cadastroUsuario" element={isAuth ? <CadastroUsuario setAuth={setAuth} /> : <Navigate to="/login" />} />
-            <Route path="/vender" element={isAuth ? <Vender setAuth={setAuth} /> : <Navigate to="/login" />} />
-            <Route path="/vendidos" element={isAuth ? <Vendidos setAuth={setAuth} /> : <Navigate to="/login" />} />
-            <Route path="/teste" element={isAuth ? <Teste setAuth={setAuth} /> : <Navigate to="/login" />} />
-            <Route path="*" element={<Navigate to={isAuth ? "/home" : "/login"} />} />
+            {isAuth && !isVendedor && (
+                <>
+                    <Route path="/home" element={<Home setAuth={setAuth} />} />
+                    <Route path="/cadastroUnidade" element={<CadastroUnidade setAuth={setAuth} />} />
+                    <Route path="/cadastroCliente" element={<CadastroCliente setAuth={setAuth} />} />
+                    <Route path="/cadastroUsuario" element={<CadastroUsuario setAuth={setAuth} />} />
+                    <Route path="/teste" element={<Teste setAuth={setAuth} />} />
+                </>
+            )}
+            {isAuth && isVendedor && (
+                <Route path="/vender" element={<Vender setAuth={setAuth} />} />
+            )}
+            <Route path="*" element={<Navigate to={isAuth ? (isVendedor ? "/vender" : "/home") : "/login"} />} />
         </Routes>
     );
 };

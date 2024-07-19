@@ -24,7 +24,11 @@ const Login = ({ setAuth }) => {
             localStorage.setItem('token', JSON.stringify(token.token));
             localStorage.setItem('user', JSON.stringify(user));
             setAuth(true);
-            navigate('/home'); 
+            if (user.id_Nivel === 5) {
+                navigate('/vender');
+            } else {
+                navigate('/home');
+            }
         } catch (error) {
             toast.info('Username ou Senha inválidos!');
         }

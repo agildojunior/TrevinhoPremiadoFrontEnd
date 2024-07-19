@@ -33,12 +33,6 @@ const Sidebar = ({ children, setAuth }) => {
             case '/cadastroCliente':
                 setNavbarTitle('Cadastro de Cliente');
                 break;
-            case '/vender':
-                setNavbarTitle('Vender Bilhetes');
-                break;
-            case '/vendidos':
-                setNavbarTitle('Bilhetes Vendidos');
-                break;
             default:
                 setNavbarTitle('Titulo da Navbar');
                 break;
@@ -91,17 +85,6 @@ const Sidebar = ({ children, setAuth }) => {
                             <SidebarMenuItem onClick={() => handleNavigation('/cadastroUsuario')}><MdHome size={18} /> Usuário</SidebarMenuItem>
                             <SidebarMenuItem onClick={() => handleNavigation('/cadastroUnidade')}><MdWork size={18} /> Unidade</SidebarMenuItem>
                             <SidebarMenuItem onClick={() => handleNavigation('/cadastroCliente')}><MdPerson size={18} /> Cliente</SidebarMenuItem>
-                        </>
-                    )}
-                </SidebarMenu>
-                <SidebarMenu>
-                    <SidebarMenuTitle onClick={() => toggleMenu('bilhetes')}>
-                        Bilhetes {menuOpen.bilhetes ? <MdArrowDropDown /> : <MdArrowRight />}
-                    </SidebarMenuTitle>
-                    {menuOpen.bilhetes && (
-                        <>
-                            <SidebarMenuItem onClick={() => handleNavigation('/vender')}><MdWork size={18} /> Vender</SidebarMenuItem>
-                            <SidebarMenuItem onClick={() => handleNavigation('/vendidos')}><MdWork size={18} /> Vendidos</SidebarMenuItem>
                         </>
                     )}
                 </SidebarMenu>

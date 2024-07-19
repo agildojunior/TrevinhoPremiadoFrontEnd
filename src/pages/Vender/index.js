@@ -57,8 +57,6 @@ const Vender = () => {
             } else {
                 newSelected.add(id);
             }
-
-            // Atualiza o console com os IDs selecionados
             console.log(`Bilhetes selecionados: ${Array.from(newSelected).join(',')}`);
             return newSelected;
         });
@@ -131,7 +129,7 @@ const Vender = () => {
                 ))}
             </BilhetesContainer>
             <FloatingButton onClick={toggleModal}>
-                Vender
+                Vender bilhetes
             </FloatingButton>
             <ModalOverlay open={modalOpen}>
                 <ModalContent>
