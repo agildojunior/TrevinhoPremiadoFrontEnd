@@ -9,7 +9,7 @@ export const BilhetesContainer = styled.div`
 
 export const Bilhete = styled.div`
     display: flex;
-    border: 1px solid ${({ selected }) => (selected ? 'blue' : 'black')};
+    border: ${({ selected }) => (selected ? '2px solid blue' : '1px solid black')};
     width: 300px;
     height: 150px;
     padding: 5px;
@@ -18,7 +18,7 @@ export const Bilhete = styled.div`
     position: relative;
     cursor: pointer;
     min-width: 300px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: ${({ selected }) => selected ? '0 3px 6px rgba(0, 0, 255, 0.5)' : '0 2px 4px rgba(0, 0, 0, 0.3)'};
 `;
 
 export const BilheteLeft = styled.div`
