@@ -13,6 +13,7 @@ export const SidebarContainer = styled.div`
   overflow-y: auto;
   scrollbar-width: none; 
   -ms-overflow-style: none; 
+  z-index: 1000;
   ::-webkit-scrollbar {
     width: 0px;  
     background: transparent;  
@@ -20,6 +21,7 @@ export const SidebarContainer = styled.div`
 `;
 
 export const PageContent = styled.div`
+  box-sizing: border-box;
   margin-left: ${({ $isOpen }) => ($isOpen ? '250px' : '0')};
   transition: margin-left 0.3s ease-in-out;
 `;
