@@ -207,6 +207,7 @@ export const CloseButton = styled.button`
     border: none;
     border-radius: 4px;
     padding: 10px 20px;
+    margin: 0px 15px;
     cursor: pointer;
     font-size: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -217,3 +218,46 @@ export const CloseButton = styled.button`
         transform: scale(1.05);
     }
 `;
+
+export const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
+export const Label = styled.label`
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    color: #333;
+`;
+
+export const Input = styled.input`
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+`;
+
+export const SubmitButton = styled.button`
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #0056b3;
+    }
+`;
+
