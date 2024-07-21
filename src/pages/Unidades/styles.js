@@ -69,3 +69,51 @@ export const LoadingMessage = styled.p`
   font-size: 18px;
   color: #888;
 `;
+
+export const ModalOverlay = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const ModalContent = styled.div`
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #000;
+    background: #fff;
+    max-width: 500px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 1001;
+`;
+
+export const ModalHeader = styled.div`
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+`;
+
+export const ModalBody = styled.div`
+    margin-bottom: 20px;
+`;
+
+export const ModalFooter = styled.div`
+    display: flex;
+    justify-content: flex-end;
+`;
+
+export const Input = styled.input`
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+`;

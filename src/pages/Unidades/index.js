@@ -1,11 +1,14 @@
-// src/pages/Unidades/index.js
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../axiosInstance';
-import { Container, TableResponsive, Table, Th, Td, Button, LoaderContainer, LoadingMessage } from './styles';
+import { Container, TableResponsive, Table, Th, Td, Button, LoaderContainer, LoadingMessage, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Input } from './styles';
+import { toast } from 'react-toastify';
 
 const Unidades = () => {
     const [unidades, setUnidades] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [selectedUnidade, setSelectedUnidade] = useState(null);
+    const [quantidadeBilhetes, setQuantidadeBilhetes] = useState(0);
 
     useEffect(() => {
         const fetchUnidades = async () => {
@@ -28,8 +31,30 @@ const Unidades = () => {
     };
 
     const handleDistribute = (id) => {
-        // Implementar a lógica para distribuir bilhetes
-        console.log(`Distribuir bilhetes para a unidade com id ${id}`);
+        setSelectedUnidade(id);
+        setModalIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalIsOpen(false);
+        setQuantidadeBilhetes(0);
+    };
+
+    const distributeBilhetes = async () => {
+        try {
+            await axiosInstance.post('/DistribuicaoBilhete/distribuir-bilhetes', null, {
+                params: {
+                    quantidadeBilhetes,
+                    idUnidade: selectedUnidade
+                }
+            });
+            toast.success('Bilhetes distribuídos com sucesso!');
+        } catch (error) {
+            toast.warning('Erro ao distribuir bilhetes!');
+            console.error('Erro ao distribuir bilhetes:', error);
+        } finally {
+            closeModal();
+        }
     };
 
     return (
@@ -64,6 +89,29 @@ const Unidades = () => {
                         </tbody>
                     </Table>
                 </TableResponsive>
+            )}
+
+            {modalIsOpen && (
+                <ModalOverlay>
+                    <ModalContent>
+                        <ModalHeader>
+                            <h2>Distribuir Bilhetes</h2>
+                        </ModalHeader>
+                        <ModalBody>
+                            <label htmlFor="quantidadeBilhetes">Quantidade de Bilhetes:</label>
+                            <Input
+                                type="number"
+                                id="quantidadeBilhetes"
+                                value={quantidadeBilhetes}
+                                onChange={(e) => setQuantidadeBilhetes(e.target.value)}
+                            />
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button onClick={distributeBilhetes}>Distribuir</Button>
+                            <Button onClick={closeModal}>Cancelar</Button>
+                        </ModalFooter>
+                    </ModalContent>
+                </ModalOverlay>
             )}
         </Container>
     );
