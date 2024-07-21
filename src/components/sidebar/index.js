@@ -21,8 +21,8 @@ const Sidebar = ({ children, setAuth }) => {
             case '/home':
                 setNavbarTitle('Inicio');
                 break;
-            case '/teste':
-                setNavbarTitle('Teste');
+            case '/unidades':
+                setNavbarTitle('Unidades');
                 break;
             case '/cadastroUnidade':
                 setNavbarTitle('Cadastro de Unidade');
@@ -72,7 +72,7 @@ const Sidebar = ({ children, setAuth }) => {
                     {menuOpen.paineis && (
                         <>
                             <SidebarMenuItem onClick={() => handleNavigation('/home')}><MdHome size={18} /> Inicio</SidebarMenuItem>
-                            <SidebarMenuItem onClick={() => handleNavigation('/teste')}><MdWork size={18} /> Teste</SidebarMenuItem>
+                            <SidebarMenuItem onClick={() => handleNavigation('/unidades')}><MdWork size={18} /> Unidades</SidebarMenuItem>
                         </>
                     )}
                 </SidebarMenu>
