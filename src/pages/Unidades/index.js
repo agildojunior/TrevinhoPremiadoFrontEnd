@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import axiosInstance from '../../axiosInstance';
 import { Container, TableResponsive, Table, Th, Td, Button, LoaderContainer, LoadingMessage, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Input } from './styles';
 import { toast } from 'react-toastify';
@@ -9,6 +10,7 @@ const Unidades = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedUnidade, setSelectedUnidade] = useState(null);
     const [quantidadeBilhetes, setQuantidadeBilhetes] = useState(0);
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         const fetchUnidades = async () => {
@@ -26,8 +28,7 @@ const Unidades = () => {
     }, []);
 
     const handleEdit = (id) => {
-        // Implementar a lógica para editar a unidade
-        console.log(`Editar unidade com id ${id}`);
+        navigate(`/unidades/editar/${id}`);
     };
 
     const handleDistribute = (id) => {
