@@ -23,7 +23,7 @@ export const Button = styled.button`
     padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #007bff;
+    background-color: #194e92;
     color: white;
     cursor: pointer;
     &:disabled {

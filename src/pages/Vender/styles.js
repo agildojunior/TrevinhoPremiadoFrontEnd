@@ -247,7 +247,7 @@ export const Input = styled.input`
 `;
 
 export const SubmitButton = styled.button`
-    background-color: #007bff;
+    background-color: #194e92;
     color: #fff;
     padding: 0.75rem;
     font-size: 1rem;

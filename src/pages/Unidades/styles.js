@@ -20,8 +20,9 @@ export const Table = styled.table`
 `;
 
 export const Th = styled.th`
-  background-color: #f2f2f2;
-  border: 1px solid #ddd;
+  background-color: #194e92;
+  border: 1px solid #111;
+  color: white;
   padding: 8px;
 
   @media (max-width: 768px) {
@@ -41,14 +42,14 @@ export const Td = styled.td`
 export const Button = styled.button`
   padding: 5px 10px;
   margin: 0 5px;
-  background-color: #3498db;
+  background-color: #194e92;
   color: white;
   border: none;
   border-radius: 3px;
   cursor: pointer;
 
   &:hover {
-    background-color: #2980b9;
+    background-color: #0056b3;
   }
 
   @media (max-width: 768px) {

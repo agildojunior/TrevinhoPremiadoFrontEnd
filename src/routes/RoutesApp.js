@@ -8,6 +8,7 @@ import CadastroCliente from '../pages/CadastroCliente';
 import CadastroUsuario from '../pages/CadastroUsuario';
 import Vender from '../pages/Vender';
 import EditarUnidade from '../pages/EditarUnidade'; 
+import Bilhetes from '../pages/Bilhetes';
 
 const RoutesApp = ({ isAuth, setAuth }) => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -24,6 +25,7 @@ const RoutesApp = ({ isAuth, setAuth }) => {
                     <Route path="/cadastroUsuario" element={<CadastroUsuario setAuth={setAuth} />} />
                     <Route path="/unidades" element={<Unidades setAuth={setAuth} />} />
                     <Route path="/unidades/editar/:id" element={<EditarUnidade />} /> 
+                    <Route path="/bilhetes/:id" element={<Bilhetes setAuth={setAuth} />} />
                 </>
             )}
             {isAuth && isVendedor && (
