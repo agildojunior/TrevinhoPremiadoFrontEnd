@@ -153,3 +153,18 @@ export const CounterValue = styled.p`
     font-size: 1.5em;
     margin: 0;
 `;
+
+export const Loader = styled.div`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em; /* Tamanho maior da fonte */
+    font-weight: bold; /* Texto em negrito */
+    color: #333;
+    z-index: 1002;
+    background: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+`;

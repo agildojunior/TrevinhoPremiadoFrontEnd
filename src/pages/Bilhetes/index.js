@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../axiosInstance';
-import { Container, ButtonContainer, Button, ModalButton, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Input, Select, Table, Th, Td, CounterContainer, CounterTitle, CounterValue } from './styles';
+import { Container, ButtonContainer, Button, ModalButton, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Input, Select, Table, Th, Td, CounterContainer, CounterTitle, CounterValue, Loader } from './styles'; // Importando Loader
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
-import { FaTicketAlt, FaUserPlus, FaPlusSquare } from 'react-icons/fa'; // Importando ícone adicional
+import { FaTicketAlt, FaUserPlus, FaPlusSquare, FaRedo } from 'react-icons/fa'; // Importando ícone adicional
 
 const Bilhetes = () => {
     const { id } = useParams();
@@ -13,6 +13,7 @@ const Bilhetes = () => {
     const [vendedores, setVendedores] = useState([]);
     const [selectedVendedor, setSelectedVendedor] = useState('');
     const [bilhetesEstoque, setBilhetesEstoque] = useState(0);
+    const [loading, setLoading] = useState(false); // Estado de carregamento
 
     useEffect(() => {
         const fetchVendedores = async () => {
@@ -50,6 +51,7 @@ const Bilhetes = () => {
 
     const handleDistribute = async () => {
         try {
+            setLoading(true); // Ativa o carregamento
             await axiosInstance.post('/DistribuicaoBilhete/distribuir-bilhetes', null, {
                 params: {
                     quantidadeBilhetes,
@@ -61,12 +63,17 @@ const Bilhetes = () => {
             toast.error('Erro ao distribuir bilhetes!');
             console.error('Erro ao distribuir bilhetes:', error);
         } finally {
+            setLoading(false); // Desativa o carregamento
             closeModal();
+            setTimeout(() => {
+                window.location.reload(); // Recarregar a página após 4 segundos
+            }, 3000);
         }
     };
 
     const handleAssign = async () => {
         try {
+            setLoading(true); // Ativa o carregamento
             await axiosInstance.post('/DistribuicaoBilhete/distribuir-bilhetes-para-vendedor', null, {
                 params: {
                     quantidadeBilhetes,
@@ -79,12 +86,17 @@ const Bilhetes = () => {
             toast.error('Erro ao atribuir bilhetes!');
             console.error('Erro ao atribuir bilhetes:', error);
         } finally {
+            setLoading(false); // Desativa o carregamento
             closeModal();
+            setTimeout(() => {
+                window.location.reload(); // Recarregar a página após 4 segundos
+            }, 3000);
         }
     };
 
     const handleGenerate = async () => {
         try {
+            setLoading(true); // Ativa o carregamento
             await axiosInstance.post('/Bilhetes/gerar-bilhetes-unidade', null, {
                 params: {
                     idUnidade: id,
@@ -93,24 +105,52 @@ const Bilhetes = () => {
             });
             toast.success('Bilhetes gerados com sucesso!');
         } catch (error) {
-            toast.warning('Bilhetes ja gerados!');
+            toast.warning('Bilhetes já gerados!');
+        } finally {
+            setLoading(false); // Desativa o carregamento
+        }
+    };
+
+    const handleReturn = async () => {
+        try {
+            setLoading(true); // Ativa o carregamento
+            await axiosInstance.post('/Bilhetes/retornar-para-estoque', null, {
+                params: {
+                    quantidadeBilhetes,
+                    idVendedor: selectedVendedor
+                }
+            });
+            toast.success('Bilhetes retornados ao estoque com sucesso!');
+        } catch (error) {
+            toast.error('Erro ao retornar bilhetes ao estoque!');
+            console.error('Erro ao retornar bilhetes ao estoque:', error);
+        } finally {
+            setLoading(false); // Desativa o carregamento
+            closeModal();
+            setTimeout(() => {
+                window.location.reload(); // Recarregar a página após 4 segundos
+            }, 3000);
         }
     };
 
     return (
         <Container>
             <ButtonContainer>
-                <Button onClick={handleGenerate}>
+                <Button onClick={handleGenerate} disabled={loading}>
                     <FaPlusSquare /> 
                     <span>Gerar Bilhetes</span>
                 </Button>
-                <Button onClick={() => openModal('distribute')}>
+                <Button onClick={() => openModal('distribute')} disabled={loading}>
                     <FaTicketAlt />
                     <span>Distribuir Bilhetes</span>
                 </Button>
-                <Button onClick={() => openModal('assign')}>
+                <Button onClick={() => openModal('assign')} disabled={loading}>
                     <FaUserPlus />
                     <span>Atribuir a Vendedor</span>
+                </Button>
+                <Button onClick={() => openModal('return')} disabled={loading}>
+                    <FaRedo />
+                    <span>Retornar ao Estoque</span>
                 </Button>
                 <CounterContainer>
                     <CounterTitle>Bilhetes em estoque</CounterTitle>
@@ -118,11 +158,13 @@ const Bilhetes = () => {
                 </CounterContainer>
             </ButtonContainer>
 
+            {loading && <Loader>Carregando...</Loader>}
+
             {modalIsOpen && (
                 <ModalOverlay>
                     <ModalContent>
                         <ModalHeader>
-                            <h2>{modalType === 'distribute' ? 'Distribuir Bilhetes' : 'Atribuir Bilhetes a Vendedor'}</h2>
+                            <h2>{modalType === 'distribute' ? 'Distribuir Bilhetes' : modalType === 'assign' ? 'Atribuir Bilhetes a Vendedor' : 'Retornar Bilhetes ao Estoque'}</h2>
                         </ModalHeader>
                         <ModalBody>
                             <label htmlFor="quantidadeBilhetes">Quantidade de Bilhetes:</label>
@@ -132,7 +174,7 @@ const Bilhetes = () => {
                                 value={quantidadeBilhetes}
                                 onChange={(e) => setQuantidadeBilhetes(e.target.value)}
                             />
-                            {modalType === 'assign' && (
+                            {(modalType === 'assign' || modalType === 'return') && (
                                 <>
                                     <label htmlFor="vendedor">Selecionar Vendedor:</label>
                                     <Select
@@ -151,8 +193,8 @@ const Bilhetes = () => {
                             )}
                         </ModalBody>
                         <ModalFooter>
-                            <ModalButton onClick={modalType === 'distribute' ? handleDistribute : handleAssign}>
-                                {modalType === 'distribute' ? 'Distribuir' : 'Atribuir'}
+                            <ModalButton onClick={modalType === 'distribute' ? handleDistribute : modalType === 'assign' ? handleAssign : handleReturn} disabled={loading}>
+                                {modalType === 'distribute' ? 'Distribuir' : modalType === 'assign' ? 'Atribuir' : 'Retornar'}
                             </ModalButton>
                             <ModalButton onClick={closeModal}>Cancelar</ModalButton>
                         </ModalFooter>
@@ -164,7 +206,7 @@ const Bilhetes = () => {
                 <thead>
                     <tr>
                         <Th>Nome</Th>
-                        <Th>Bilhetes Atribuidos</Th>
+                        <Th>Bilhetes Atribuídos</Th>
                         <Th>Vendidos</Th>
                     </tr>
                 </thead>
