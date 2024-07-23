@@ -6,6 +6,7 @@ export const Container = styled.div`
 
 export const TableResponsive = styled.div`
   overflow-x: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
 export const Table = styled.table`

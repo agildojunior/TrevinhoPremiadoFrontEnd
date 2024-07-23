@@ -4,13 +4,15 @@ export const Container = styled.div`
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: flex-start;
 `;
 
 export const ButtonContainer = styled.div`
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
+    position: relative;
+    width: 100%;
 `;
 
 export const Button = styled.button`
@@ -106,6 +108,7 @@ export const Select = styled.select`
 
 export const Table = styled.table`
     width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     border-collapse: collapse;
     margin-top: 20px;
 `;
@@ -121,4 +124,32 @@ export const Th = styled.th`
 export const Td = styled.td`
     border: 1px solid #ddd;
     padding: 8px;
+`;
+
+export const CounterContainer = styled.div`
+    background-color: #194e92;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 170px;
+    position: absolute;
+    right: 0;
+    top: 0;
+`;
+
+export const CounterTitle = styled.h3`
+    margin: 0;
+    padding-bottom: 10px;
+    font-size: 0.9em;
+`;
+
+export const CounterValue = styled.p`
+    font-size: 1.5em;
+    margin: 0;
 `;
