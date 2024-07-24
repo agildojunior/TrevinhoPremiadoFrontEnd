@@ -2,18 +2,20 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../axiosInstance';
 import { Container, ButtonContainer, Button, ModalButton, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Input, Select, Table, Th, Td, CounterContainer, CounterTitle, CounterValue, Loader } from './styles'; // Importando Loader
 import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
-import { FaTicketAlt, FaUserPlus, FaPlusSquare, FaRedo } from 'react-icons/fa'; // Importando ícone adicional
+import { useParams, useNavigate } from 'react-router-dom';
+import { FaTicketAlt, FaUserPlus, FaPlusSquare, FaRedo } from 'react-icons/fa'; 
 
 const Bilhetes = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [modalType, setModalType] = useState('');
     const [quantidadeBilhetes, setQuantidadeBilhetes] = useState(0);
     const [vendedores, setVendedores] = useState([]);
     const [selectedVendedor, setSelectedVendedor] = useState('');
     const [bilhetesEstoque, setBilhetesEstoque] = useState(0);
-    const [loading, setLoading] = useState(false); // Estado de carregamento
+    const [loading, setLoading] = useState(false); 
+    const user = JSON.parse(localStorage.getItem('user')); 
 
     useEffect(() => {
         const fetchVendedores = async () => {
@@ -38,6 +40,23 @@ const Bilhetes = () => {
         fetchBilhetesEstoque();
     }, [id]);
 
+    useEffect(() => {
+        const checkCoordinator = async () => {
+            try {
+                const response = await axiosInstance.get(`/Unidades/${id}`);
+                const unidade = response.data;
+
+                if (unidade.id_Pessoa !== user.id_Pessoa && user.id_Nivel === 4) {
+                    navigate('/home');
+                }
+            } catch (error) {
+                console.error('Erro ao verificar coordenador:', error);
+            }
+        };
+
+        checkCoordinator();
+    }, [id, user.id_Pessoa, user.id_Nivel, navigate]);
+
     const openModal = (type) => {
         setModalType(type);
         setModalIsOpen(true);
@@ -51,7 +70,7 @@ const Bilhetes = () => {
 
     const handleDistribute = async () => {
         try {
-            setLoading(true); // Ativa o carregamento
+            setLoading(true);
             await axiosInstance.post('/DistribuicaoBilhete/distribuir-bilhetes', null, {
                 params: {
                     quantidadeBilhetes,
@@ -63,17 +82,17 @@ const Bilhetes = () => {
             toast.error('Erro ao distribuir bilhetes!');
             console.error('Erro ao distribuir bilhetes:', error);
         } finally {
-            setLoading(false); // Desativa o carregamento
+            setLoading(false); 
             closeModal();
             setTimeout(() => {
-                window.location.reload(); // Recarregar a página após 4 segundos
+                window.location.reload(); 
             }, 3000);
         }
     };
 
     const handleAssign = async () => {
         try {
-            setLoading(true); // Ativa o carregamento
+            setLoading(true); 
             await axiosInstance.post('/DistribuicaoBilhete/distribuir-bilhetes-para-vendedor', null, {
                 params: {
                     quantidadeBilhetes,
@@ -86,17 +105,17 @@ const Bilhetes = () => {
             toast.error('Erro ao atribuir bilhetes!');
             console.error('Erro ao atribuir bilhetes:', error);
         } finally {
-            setLoading(false); // Desativa o carregamento
+            setLoading(false); 
             closeModal();
             setTimeout(() => {
-                window.location.reload(); // Recarregar a página após 4 segundos
+                window.location.reload(); 
             }, 3000);
         }
     };
 
     const handleGenerate = async () => {
         try {
-            setLoading(true); // Ativa o carregamento
+            setLoading(true); 
             await axiosInstance.post('/Bilhetes/gerar-bilhetes-unidade', null, {
                 params: {
                     idUnidade: id,
@@ -107,13 +126,13 @@ const Bilhetes = () => {
         } catch (error) {
             toast.warning('Bilhetes já gerados!');
         } finally {
-            setLoading(false); // Desativa o carregamento
+            setLoading(false); 
         }
     };
 
     const handleReturn = async () => {
         try {
-            setLoading(true); // Ativa o carregamento
+            setLoading(true);
             await axiosInstance.post('/Bilhetes/retornar-para-estoque', null, {
                 params: {
                     quantidadeBilhetes,
@@ -125,10 +144,10 @@ const Bilhetes = () => {
             toast.error('Erro ao retornar bilhetes ao estoque!');
             console.error('Erro ao retornar bilhetes ao estoque:', error);
         } finally {
-            setLoading(false); // Desativa o carregamento
+            setLoading(false);
             closeModal();
             setTimeout(() => {
-                window.location.reload(); // Recarregar a página após 4 segundos
+                window.location.reload(); 
             }, 3000);
         }
     };
@@ -144,14 +163,18 @@ const Bilhetes = () => {
                     <FaTicketAlt />
                     <span>Distribuir Bilhetes</span>
                 </Button>
-                <Button onClick={() => openModal('assign')} disabled={loading}>
-                    <FaUserPlus />
-                    <span>Atribuir a Vendedor</span>
-                </Button>
-                <Button onClick={() => openModal('return')} disabled={loading}>
-                    <FaRedo />
-                    <span>Retornar ao Estoque</span>
-                </Button>
+                {user.id_Nivel !== 4 && (
+                    <>
+                        <Button onClick={() => openModal('assign')} disabled={loading}>
+                            <FaUserPlus />
+                            <span>Atribuir a Vendedor</span>
+                        </Button>
+                        <Button onClick={() => openModal('return')} disabled={loading}>
+                            <FaRedo />
+                            <span>Retornar ao Estoque</span>
+                        </Button>
+                    </>
+                )}
                 <CounterContainer>
                     <CounterTitle>Bilhetes em estoque</CounterTitle>
                     <CounterValue>{bilhetesEstoque}</CounterValue>
@@ -214,8 +237,8 @@ const Bilhetes = () => {
                     {vendedores.map((vendedor) => (
                         <tr key={vendedor.id}>
                             <Td>{vendedor.nome}</Td>
-                            <Td>{vendedor.quantidadeBilhetes}</Td>
-                            <Td>{vendedor.quantidadeBilhetesVendidos}</Td>
+                            <Td>{vendedor.totalBilhetes}</Td>
+                            <Td>{vendedor.totalVendidos}</Td>
                         </tr>
                     ))}
                 </tbody>

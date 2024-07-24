@@ -36,10 +36,12 @@ const Home = () => {
                         </IconButton>
                     </>
                 )}
-                <IconButton onClick={() => handleNavigate('/unidades')} title="Unidades">
-                    <Icon><FaBuilding /></Icon>
-                    <ButtonLabel>Unidades</ButtonLabel>
-                </IconButton>
+                {!isCoordenador && (
+                    <IconButton onClick={() => handleNavigate('/unidades')} title="Unidades">
+                        <Icon><FaBuilding /></Icon>
+                        <ButtonLabel>Unidades</ButtonLabel>
+                    </IconButton>
+                )}
                 <IconButton onClick={() => handleNavigate('/bilhetesListUnidades')} title="Bilhetes">
                     <Icon><FaTicketAlt /></Icon>
                     <ButtonLabel>Bilhetes</ButtonLabel>

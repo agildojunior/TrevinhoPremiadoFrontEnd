@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import axiosInstance from '../../axiosInstance';
 import { Container, ButtonContainer, IconButton, Icon, ButtonLabel, LoaderContainer, LoadingMessage, FilterInput } from './styles';
-import { FaCity } from 'react-icons/fa'; // Importando o ícone de cidade
+import { FaCity } from 'react-icons/fa'; 
 
 const BilhetesListUnidades = () => {
     const [unidades, setUnidades] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState('');
     const navigate = useNavigate(); 
+
+    const user = JSON.parse(localStorage.getItem('user')); 
+    const isCoordenador = user?.id_Nivel === 4; 
 
     useEffect(() => {
         const fetchUnidades = async () => {
@@ -33,6 +36,10 @@ const BilhetesListUnidades = () => {
         unidade.cidade.toLowerCase().includes(filter.toLowerCase())
     );
 
+    const unidadesFiltradasParaCoordenador = isCoordenador 
+        ? filteredUnidades.filter(unidade => unidade.id_Pessoa === user.id_Pessoa)
+        : filteredUnidades;
+
     return (
         <Container>
             {loading ? (
@@ -48,7 +55,7 @@ const BilhetesListUnidades = () => {
                         onChange={(e) => setFilter(e.target.value)}
                     />
                     <ButtonContainer>
-                        {filteredUnidades.map((unidade) => (
+                        {unidadesFiltradasParaCoordenador.map((unidade) => (
                             <IconButton key={unidade.id} onClick={() => handleBilhetes(unidade.id)} title={`Bilhetes de ${unidade.cidade} + ${unidade.estado}`}>
                                 <Icon><FaCity /></Icon>
                                 <ButtonLabel>Bilhetes de {unidade.cidade}/{unidade.estado}</ButtonLabel>
