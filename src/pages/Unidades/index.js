@@ -27,10 +27,6 @@ const Unidades = () => {
         navigate(`/unidades/editar/${id}`);
     };
 
-    const handleBilhetes = (id) => {
-        navigate(`/bilhetes/${id}`);
-    };
-
     return (
         <Container>
             {loading ? (
@@ -56,7 +52,6 @@ const Unidades = () => {
                                     <Td>{unidade.nome_Pessoa}</Td>
                                     <Td>
                                         <Button onClick={() => handleEdit(unidade.id)}>Editar</Button>
-                                        <Button onClick={() => handleBilhetes(unidade.id)}>Bilhetes</Button>
                                     </Td>
                                 </tr>
                             ))}
