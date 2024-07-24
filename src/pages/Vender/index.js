@@ -55,10 +55,6 @@ const Vender = () => {
     const toggleModal = () => {
         setModalOpen(!modalOpen);
     };
-    const toggleModalReload = () => {
-        setModalOpen(!modalOpen);
-        window.location.reload();
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -81,6 +77,23 @@ const Vender = () => {
     const getCurrentDate = () => {
         const today = new Date();
         return today.toLocaleDateString('pt-BR');
+    };
+
+    const handleVenda = async () => {
+        try {
+            const idsBilhetes = Array.from(selectedBilhetes).join(',');
+            const params = new URLSearchParams({
+                idUsuario: user.id,
+                idPessoa: pessoa.id,
+                idsBilhetes: idsBilhetes
+            }).toString();
+            await axiosInstance.post(`/Caixas/processar-venda?${params}`);
+            alert('Venda processada com sucesso!');
+            window.location.reload();
+        } catch (error) {
+            console.error('Erro ao processar venda:', error);
+            alert('Erro ao processar venda.');
+        }
     };
 
     return (
@@ -174,7 +187,7 @@ const Vender = () => {
                     <ModalOverlay open={modalOpen}>
                         <ModalContent>
                             <h2>Deseja finalizar esta compra?</h2>
-                            <CloseButton onClick={toggleModalReload}>Sim</CloseButton>
+                            <CloseButton onClick={handleVenda}>Sim</CloseButton>
                             <CloseButton onClick={toggleModal}>Não</CloseButton>
                         </ModalContent>
                     </ModalOverlay>
