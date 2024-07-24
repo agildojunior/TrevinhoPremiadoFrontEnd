@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import RoutesApp from './routes/RoutesApp';
-import Sidebar from './components/sidebar'; 
+//import Sidebar from './components/sidebar'; 
 import Navbar from './components/navbar'; 
 import GlobalStyle from './styles/global';
 import { ToastContainer } from 'react-toastify';
@@ -33,9 +33,9 @@ const App = () => {
             {isAuth ? (
                 showSidebar ? (
                     <>
-                        <Sidebar setAuth={setAuth}>
+                        <Navbar setAuth={setAuth}>
                             <RoutesApp isAuth={isAuth} setAuth={setAuth} />
-                        </Sidebar>
+                        </Navbar>
                     </>
                 ) : (
                     <>

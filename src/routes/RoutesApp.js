@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from '../pages/Home';
 import Unidades from '../pages/Unidades';
+import BilhetesListUnidades from '../pages/BilhetesListUnidades';
 import Login from '../pages/Login';
 import CadastroUnidade from '../pages/CadastroUnidade';
 import CadastroCliente from '../pages/CadastroCliente';
@@ -24,6 +25,7 @@ const RoutesApp = ({ isAuth, setAuth }) => {
                     <Route path="/cadastroCliente" element={<CadastroCliente setAuth={setAuth} />} />
                     <Route path="/cadastroUsuario" element={<CadastroUsuario setAuth={setAuth} />} />
                     <Route path="/unidades" element={<Unidades setAuth={setAuth} />} />
+                    <Route path="/bilhetesListUnidades" element={<BilhetesListUnidades setAuth={setAuth} />} />
                     <Route path="/unidades/editar/:id" element={<EditarUnidade />} /> 
                     <Route path="/bilhetes/:id" element={<Bilhetes setAuth={setAuth} />} />
                 </>

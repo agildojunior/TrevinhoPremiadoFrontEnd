@@ -19,15 +19,15 @@ export const IconButton = styled.button`
     background-color: #194e92;
     color: white;
     border: none;
-    width: 200px; /* Tamanho fixo dos botões */
-    height: 200px; /* Ajustado para acomodar o título */
+    width: 160px; /* Ajustado para o tamanho dos botões */
+    height: 160px; /* Ajustado para acomodar o título */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 2em; /* Tamanho dos ícones */
+    font-size: 1.5em; /* Tamanho dos ícones reduzido */
     transition: background-color 0.3s;
     text-align: center;
 
@@ -37,10 +37,22 @@ export const IconButton = styled.button`
 `;
 
 export const Icon = styled.div`
-    font-size: 2.5em; /* Tamanho dos ícones */
+    font-size: 1.8em; /* Tamanho dos ícones reduzido */
 `;
 
 export const ButtonLabel = styled.div`
-    margin-top: 10px;
-    font-size: 0.9em; /* Tamanho do texto */
+    margin-top: 8px; /* Margem ajustada para o texto */
+    font-size: 0.8em; /* Tamanho da fonte reduzido */
+`;
+
+export const LoaderContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Ajuste conforme necessário */
+`;
+
+export const LoadingMessage = styled.div`
+    font-size: 1.2em;
+    color: #194e92;
 `;

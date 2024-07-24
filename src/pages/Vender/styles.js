@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const BilhetesContainer = styled.div`
+    padding: 30px 0px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

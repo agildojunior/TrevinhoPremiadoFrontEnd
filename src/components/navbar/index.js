@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { NavbarContainer, LogoutButton, Content, Title } from './styles';
+import { NavbarContainer, LogoutButton, Content, Title, Logo } from './styles';
 import { MdExitToApp } from 'react-icons/md';
+import logo from '../../assets/images/logo.png';
 
 const Navbar = ({ setAuth, children }) => {
     const navigate = useNavigate();
@@ -13,10 +14,15 @@ const Navbar = ({ setAuth, children }) => {
         navigate('/login');
     };
 
+    const handleTitleClick = () => {
+        navigate('/home'); // Navega para a tela Home ao clicar no título
+    };
+
     return (
         <>
             <NavbarContainer>
-                <Title>Bilhetes</Title>
+                <Logo src={logo} alt="Logo" />
+                <Title onClick={handleTitleClick}>Trevinho Premiado</Title>
                 <LogoutButton onClick={handleLogout}>
                     <MdExitToApp size={18} /> Sair
                 </LogoutButton>
