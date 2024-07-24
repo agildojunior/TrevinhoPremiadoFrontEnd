@@ -121,7 +121,7 @@ const EditarUnidade = () => {
                             key={pessoa.id}
                             onClick={() => handleOptionSelect(pessoa.id, pessoa.nome)}
                         >
-                            {pessoa.nome}
+                            {pessoa.nome} | Contato:{pessoa.contato}
                         </DropdownItem>
                     ))}
                 </Dropdown>

@@ -90,7 +90,7 @@ const CadastroUnidade = () => {
                             key={pessoa.id}
                             onClick={() => handleOptionSelect(pessoa.id, pessoa.nome)}
                         >
-                            {pessoa.nome}
+                            {pessoa.nome} | Contato:{pessoa.contato}
                         </DropdownItem>
                     ))}
                 </Dropdown>
@@ -104,7 +104,7 @@ const CadastroUnidade = () => {
                 <option value="">Responsável</option>
                 {filteredPessoas.map((pessoa) => (
                     <option key={pessoa.id} value={pessoa.id}>
-                        {pessoa.nome}
+                        {pessoa.contato}
                     </option>
                 ))}
             </Select>
