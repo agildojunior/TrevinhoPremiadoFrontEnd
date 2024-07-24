@@ -228,7 +228,7 @@ const Bilhetes = () => {
             <Table>
                 <thead>
                     <tr>
-                        <Th>Nome</Th>
+                        <Th>Vendedor</Th>
                         <Th>Bilhetes Atribuídos</Th>
                         <Th>Vendidos</Th>
                     </tr>
