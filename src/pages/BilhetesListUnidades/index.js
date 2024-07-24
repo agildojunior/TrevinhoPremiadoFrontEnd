@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import axiosInstance from '../../axiosInstance';
-import { Container, ButtonContainer, IconButton, Icon, ButtonLabel, LoaderContainer, LoadingMessage } from './styles';
+import { Container, ButtonContainer, IconButton, Icon, ButtonLabel, LoaderContainer, LoadingMessage, FilterInput } from './styles';
 import { FaCity } from 'react-icons/fa'; // Importando o ícone de cidade
 
 const BilhetesListUnidades = () => {
     const [unidades, setUnidades] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [filter, setFilter] = useState('');
     const navigate = useNavigate(); 
 
     useEffect(() => {
@@ -28,6 +29,10 @@ const BilhetesListUnidades = () => {
         navigate(`/bilhetes/${id}`);
     };
 
+    const filteredUnidades = unidades.filter(unidade =>
+        unidade.cidade.toLowerCase().includes(filter.toLowerCase())
+    );
+
     return (
         <Container>
             {loading ? (
@@ -35,14 +40,22 @@ const BilhetesListUnidades = () => {
                     <LoadingMessage>Carregando dados...</LoadingMessage>
                 </LoaderContainer>
             ) : (
-                <ButtonContainer>
-                    {unidades.map((unidade) => (
-                        <IconButton key={unidade.id} onClick={() => handleBilhetes(unidade.id)} title={`Bilhetes de ${unidade.cidade} + ${unidade.estado}`}>
-                            <Icon><FaCity /></Icon>
-                            <ButtonLabel>Bilhetes de {unidade.cidade}/{unidade.estado}</ButtonLabel>
-                        </IconButton>
-                    ))}
-                </ButtonContainer>
+                <>
+                    <FilterInput 
+                        type="text" 
+                        placeholder="Filtrar por cidade..." 
+                        value={filter}
+                        onChange={(e) => setFilter(e.target.value)}
+                    />
+                    <ButtonContainer>
+                        {filteredUnidades.map((unidade) => (
+                            <IconButton key={unidade.id} onClick={() => handleBilhetes(unidade.id)} title={`Bilhetes de ${unidade.cidade} + ${unidade.estado}`}>
+                                <Icon><FaCity /></Icon>
+                                <ButtonLabel>Bilhetes de {unidade.cidade}/{unidade.estado}</ButtonLabel>
+                            </IconButton>
+                        ))}
+                    </ButtonContainer>
+                </>
             )}
         </Container>
     );
