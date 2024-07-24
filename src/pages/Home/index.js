@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import { FaHome, FaTicketAlt, FaBuilding, FaUserPlus, FaUserEdit } from 'react-icons/fa'; 
+import { FaHome, FaTicketAlt, FaBuilding, FaUserPlus, FaUserEdit, FaCashRegister } from 'react-icons/fa'; 
 import { Container, ButtonContainer, IconButton, Icon, ButtonLabel } from './styles'; 
 
 const Home = () => {
@@ -45,6 +45,10 @@ const Home = () => {
                 <IconButton onClick={() => handleNavigate('/bilhetesListUnidades')} title="Bilhetes">
                     <Icon><FaTicketAlt /></Icon>
                     <ButtonLabel>Bilhetes</ButtonLabel>
+                </IconButton>
+                <IconButton onClick={() => handleNavigate('/caixasListUnidades')} title="Caixas">
+                    <Icon><FaCashRegister /></Icon>
+                    <ButtonLabel>Caixas</ButtonLabel>
                 </IconButton>
             </ButtonContainer>
         </Container>
