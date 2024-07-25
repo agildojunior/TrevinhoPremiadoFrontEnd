@@ -22,7 +22,6 @@ const Bilhetes = () => {
             try {
                 const response = await axiosInstance.get(`/Vendedores/unidade/${id}`);
                 setVendedores(response.data);
-                console.log(response);
             } catch (error) {
                 console.error('Erro ao buscar vendedores:', error);
             }
@@ -81,7 +80,6 @@ const Bilhetes = () => {
             toast.success('Bilhetes distribuídos com sucesso!');
         } catch (error) {
             toast.error('Erro ao distribuir bilhetes!');
-            console.error('Erro ao distribuir bilhetes:', error);
         } finally {
             setLoading(false); 
             closeModal();
@@ -104,7 +102,6 @@ const Bilhetes = () => {
             toast.success('Bilhetes atribuídos ao vendedor com sucesso!');
         } catch (error) {
             toast.error('Erro ao atribuir bilhetes!');
-            console.error('Erro ao atribuir bilhetes:', error);
         } finally {
             setLoading(false); 
             closeModal();
@@ -143,7 +140,6 @@ const Bilhetes = () => {
             toast.success('Bilhetes retornados ao estoque com sucesso!');
         } catch (error) {
             toast.error('Erro ao retornar bilhetes ao estoque!');
-            console.error('Erro ao retornar bilhetes ao estoque:', error);
         } finally {
             setLoading(false);
             closeModal();

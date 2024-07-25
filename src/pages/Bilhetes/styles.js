@@ -107,23 +107,45 @@ export const Select = styled.select`
 `;
 
 export const Table = styled.table`
-    width: 100%;
+    overflow-x: auto;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    font-size: 18px;
+    text-align: left;
+
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
 `;
 
 export const Th = styled.th`
     background-color: #194e92;
-    border: 1px solid #111;
-    color: white;
-    padding: 8px;
-    text-align: left;
+    border: 1px solid #ddd;
+    color: #fff;
+    padding: 12px;
+
+    @media (max-width: 768px) {
+        padding: 8px;
+    }
 `;
 
 export const Td = styled.td`
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 12px;
+    background-color: #f9f9f9;
+
+    &:nth-child(even) {
+        background-color: #f1f1f1;
+    }
+
+    &:hover {
+        background-color: #e0e0e0;
+    }
+
+    @media (max-width: 768px) {
+        padding: 8px;
+    }
 `;
 
 export const CounterContainer = styled.div`
