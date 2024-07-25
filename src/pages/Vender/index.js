@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
     Bilhete, BilheteLeft, BilheteRight, DataContainer, NumberContainer, DataItem, Title, Value, NumberTitle, LogoContainer,
     NumberValue, NumberTopLeft, NumberTopRight, NumberBottomLeft, NumberBottomRight, FooterText, BilhetesContainer, 
-    FloatingButton, ModalOverlay, ModalContent, CloseButton, Form, Label, Input, SubmitButton
+    FloatingButton, ModalOverlay, ModalContent, CloseButton, Form, Label, Input, SubmitButton, Select
 } from './styles';
 import logo from '../../assets/images/logo.png';
 import axiosInstance from '../../axiosInstance';
@@ -12,11 +12,11 @@ const Vender = () => {
     const [selectedBilhetes, setSelectedBilhetes] = useState(new Set());
     const [modalOpen, setModalOpen] = useState(false);
     const [pessoa, setPessoa] = useState(null);
-
     const [nome, setNome] = useState('');
     const [dtNascimento, setDtNascimento] = useState('');
     const [contato, setContato] = useState('');
     const [endereco, setEndereco] = useState('');
+    const [metodoPagamento, setMetodoPagamento] = useState('');
     const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
@@ -80,14 +80,22 @@ const Vender = () => {
     };
 
     const handleVenda = async () => {
+        if (!metodoPagamento) {
+            alert('Por favor, selecione um método de pagamento.');
+            return;
+        }
+    
         try {
             const idsBilhetes = Array.from(selectedBilhetes).join(',');
-            const params = new URLSearchParams({
+            const params = {
                 idUsuario: user.id,
                 idPessoa: pessoa.id,
-                idsBilhetes: idsBilhetes
-            }).toString();
-            await axiosInstance.post(`/Caixas/processar-venda?${params}`);
+                idsBilhetes: idsBilhetes,
+                metodoPagamento: metodoPagamento
+            };
+            
+            await axiosInstance.post(`/Caixas/processar-venda`, null, { params });
+            
             alert('Venda processada com sucesso!');
             window.location.reload();
         } catch (error) {
@@ -181,14 +189,20 @@ const Vender = () => {
                             </Bilhete>
                         ))}
                     </BilhetesContainer>
-                    <FloatingButton onClick={toggleModal}>
-                        Vender bilhetes
-                    </FloatingButton>
+                    <FloatingButton onClick={toggleModal}>Finalizar Compra</FloatingButton>
                     <ModalOverlay open={modalOpen}>
                         <ModalContent>
                             <h2>Deseja finalizar esta compra?</h2>
-                            <CloseButton onClick={handleVenda}>Sim</CloseButton>
-                            <CloseButton onClick={toggleModal}>Não</CloseButton>
+                            <Label>
+                                Método de Pagamento:
+                                <Select value={metodoPagamento} onChange={(e) => setMetodoPagamento(e.target.value)} required>
+                                    <option value="" disabled>Selecione</option>
+                                    <option value="PIX">PIX</option>
+                                    <option value="DINHEIRO">DINHEIRO</option>
+                                </Select>
+                            </Label>
+                            <SubmitButton onClick={handleVenda}>Confirmar</SubmitButton>
+                            <CloseButton onClick={toggleModal}>Cancelar</CloseButton>
                         </ModalContent>
                     </ModalOverlay>
                 </>

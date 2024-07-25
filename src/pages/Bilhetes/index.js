@@ -22,6 +22,7 @@ const Bilhetes = () => {
             try {
                 const response = await axiosInstance.get(`/Vendedores/unidade/${id}`);
                 setVendedores(response.data);
+                console.log(response);
             } catch (error) {
                 console.error('Erro ao buscar vendedores:', error);
             }
@@ -237,8 +238,8 @@ const Bilhetes = () => {
                     {vendedores.map((vendedor) => (
                         <tr key={vendedor.id}>
                             <Td>{vendedor.nome}</Td>
-                            <Td>{vendedor.totalBilhetes}</Td>
-                            <Td>{vendedor.totalVendidos}</Td>
+                            <Td>{vendedor.quantidadeBilhetes}</Td>
+                            <Td>{vendedor.quantidadeBilhetesVendidos}</Td>
                         </tr>
                     ))}
                 </tbody>

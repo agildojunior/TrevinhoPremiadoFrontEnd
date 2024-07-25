@@ -262,3 +262,10 @@ export const SubmitButton = styled.button`
     }
 `;
 
+export const Select = styled.select`
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+`;
