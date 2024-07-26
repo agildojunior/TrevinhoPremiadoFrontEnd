@@ -14,8 +14,9 @@ import Bilhetes from '../pages/Bilhetes';
 import Caixas from '../pages/Caixas';
 import Relatorios from '../pages/Relatorios';
 
-const RoutesApp = ({ isAuth, setAuth }) => {
+const RoutesApp = () => {
     const user = JSON.parse(localStorage.getItem('user'));
+    const isAuth = localStorage.getItem('isAuth') === 'true';
     const userLevel = user?.id_Nivel;
 
     const renderRoutes = () => {
@@ -27,63 +28,63 @@ const RoutesApp = ({ isAuth, setAuth }) => {
             case 1: // Administrador
                 return (
                     <>
-                        <Route path="/home" element={<Home setAuth={setAuth} />} />
-                        <Route path="/cadastroUnidade" element={<CadastroUnidade setAuth={setAuth} />} />
-                        <Route path="/cadastroCliente" element={<CadastroCliente setAuth={setAuth} />} />
-                        <Route path="/cadastroUsuario" element={<CadastroUsuario setAuth={setAuth} />} />
-                        <Route path="/unidades" element={<Unidades setAuth={setAuth} />} />
-                        <Route path="/bilhetesListUnidades" element={<BilhetesListUnidades setAuth={setAuth} />} />
-                        <Route path="/caixasListUnidades" element={<CaixasListUnidades setAuth={setAuth} />} />
+                        <Route path="/home" element={<Home />} />
+                        <Route path="/cadastroUnidade" element={<CadastroUnidade />} />
+                        <Route path="/cadastroCliente" element={<CadastroCliente />} />
+                        <Route path="/cadastroUsuario" element={<CadastroUsuario />} />
+                        <Route path="/unidades" element={<Unidades />} />
+                        <Route path="/bilhetesListUnidades" element={<BilhetesListUnidades />} />
+                        <Route path="/caixasListUnidades" element={<CaixasListUnidades />} />
                         <Route path="/unidades/editar/:id" element={<EditarUnidade />} /> 
-                        <Route path="/bilhetes/:id" element={<Bilhetes setAuth={setAuth} />} />
-                        <Route path="/caixas/:id" element={<Caixas setAuth={setAuth} />} />
-                        <Route path="/relatorios" element={<Relatorios setAuth={setAuth} />} />
+                        <Route path="/bilhetes/:id" element={<Bilhetes />} />
+                        <Route path="/caixas/:id" element={<Caixas />} />
+                        <Route path="/relatorios" element={<Relatorios />} />
                     </>
                 );
             case 2: // Suporte
                 return (
                     <>
-                        <Route path="/home" element={<Home setAuth={setAuth} />} />
-                        <Route path="/cadastroUnidade" element={<CadastroUnidade setAuth={setAuth} />} />
-                        <Route path="/cadastroCliente" element={<CadastroCliente setAuth={setAuth} />} />
-                        <Route path="/cadastroUsuario" element={<CadastroUsuario setAuth={setAuth} />} />
-                        <Route path="/unidades" element={<Unidades setAuth={setAuth} />} />
-                        <Route path="/bilhetesListUnidades" element={<BilhetesListUnidades setAuth={setAuth} />} />
-                        <Route path="/caixasListUnidades" element={<CaixasListUnidades setAuth={setAuth} />} />
+                        <Route path="/home" element={<Home />} />
+                        <Route path="/cadastroUnidade" element={<CadastroUnidade />} />
+                        <Route path="/cadastroCliente" element={<CadastroCliente />} />
+                        <Route path="/cadastroUsuario" element={<CadastroUsuario />} />
+                        <Route path="/unidades" element={<Unidades />} />
+                        <Route path="/bilhetesListUnidades" element={<BilhetesListUnidades />} />
+                        <Route path="/caixasListUnidades" element={<CaixasListUnidades />} />
                         <Route path="/unidades/editar/:id" element={<EditarUnidade />} /> 
-                        <Route path="/bilhetes/:id" element={<Bilhetes setAuth={setAuth} />} />
-                        <Route path="/caixas/:id" element={<Caixas setAuth={setAuth} />} />
-                        <Route path="/relatorios" element={<Relatorios setAuth={setAuth} />} />
+                        <Route path="/bilhetes/:id" element={<Bilhetes />} />
+                        <Route path="/caixas/:id" element={<Caixas />} />
+                        <Route path="/relatorios" element={<Relatorios />} />
                     </>
                 );
             case 3: // Gestor
                 return (
                     <>
-                        <Route path="/home" element={<Home setAuth={setAuth} />} />
-                        <Route path="/unidades" element={<Unidades setAuth={setAuth} />} />
-                        <Route path="/bilhetesListUnidades" element={<BilhetesListUnidades setAuth={setAuth} />} />
-                        <Route path="/caixasListUnidades" element={<CaixasListUnidades setAuth={setAuth} />} />
+                        <Route path="/home" element={<Home />} />
+                        <Route path="/unidades" element={<Unidades />} />
+                        <Route path="/bilhetesListUnidades" element={<BilhetesListUnidades />} />
+                        <Route path="/caixasListUnidades" element={<CaixasListUnidades />} />
                         <Route path="/unidades/editar/:id" element={<EditarUnidade />} /> 
-                        <Route path="/bilhetes/:id" element={<Bilhetes setAuth={setAuth} />} />
-                        <Route path="/caixas/:id" element={<Caixas setAuth={setAuth} />} />
-                        <Route path="/relatorios" element={<Relatorios setAuth={setAuth} />} />
+                        <Route path="/bilhetes/:id" element={<Bilhetes />} />
+                        <Route path="/caixas/:id" element={<Caixas />} />
+                        <Route path="/relatorios" element={<Relatorios />} />
                     </>
                 );
             case 4: // Coordenador
                 return (
                     <>
-                        <Route path="/home" element={<Home setAuth={setAuth} />} />
-                        <Route path="/unidades" element={<Unidades setAuth={setAuth} />} />
-                        <Route path="/bilhetesListUnidades" element={<BilhetesListUnidades setAuth={setAuth} />} />
-                        <Route path="/caixasListUnidades" element={<CaixasListUnidades setAuth={setAuth} />} /> 
-                        <Route path="/bilhetes/:id" element={<Bilhetes setAuth={setAuth} />} />
-                        <Route path="/caixas/:id" element={<Caixas setAuth={setAuth} />} />
-                        <Route path="/relatorios" element={<Relatorios setAuth={setAuth} />} />
+                        <Route path="/home" element={<Home />} />
+                        <Route path="/unidades" element={<Unidades />} />
+                        <Route path="/bilhetesListUnidades" element={<BilhetesListUnidades />} />
+                        <Route path="/caixasListUnidades" element={<CaixasListUnidades />} /> 
+                        <Route path="/bilhetes/:id" element={<Bilhetes />} />
+                        <Route path="/caixas/:id" element={<Caixas />} />
+                        <Route path="/relatorios" element={<Relatorios />} />
                     </>
                 );
             case 5: // Vendedor
                 return (
-                    <Route path="/vender" element={<Vender setAuth={setAuth} />} />
+                    <Route path="/vender" element={<Vender />} />
                 );
             default:
                 return <Route path="*" element={<Navigate to="/login" />} />;
@@ -92,7 +93,7 @@ const RoutesApp = ({ isAuth, setAuth }) => {
 
     return (
         <Routes>
-            <Route path="/login" element={isAuth ? <Navigate to="/home" /> : <Login setAuth={setAuth} />} />
+            <Route path="/login" element={isAuth ? <Navigate to="/home" /> : <Login />} />
             {renderRoutes()}
             <Route path="*" element={<Navigate to={isAuth ? (userLevel === 5 ? "/vender" : "/home") : "/login"} />} />
         </Routes>

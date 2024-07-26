@@ -5,7 +5,7 @@ import { Page, FormLogin, Label, Input, Button, LogoImage } from './styles';
 import logoImg from '../../assets/images/logo.png';
 import { toast } from 'react-toastify';
 
-const Login = ({ setAuth }) => {
+const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -23,7 +23,8 @@ const Login = ({ setAuth }) => {
             const { token, user } = response.data;
             localStorage.setItem('token', JSON.stringify(token.token));
             localStorage.setItem('user', JSON.stringify(user));
-            setAuth(true);
+            localStorage.setItem('isAuth', 'true'); 
+            window.location.reload();
             if (user.id_Nivel === 5) {
                 navigate('/vender');
             } else {

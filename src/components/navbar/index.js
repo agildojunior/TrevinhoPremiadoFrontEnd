@@ -4,13 +4,14 @@ import { NavbarContainer, LogoutButton, Content, Title, Logo } from './styles';
 import { MdExitToApp } from 'react-icons/md';
 import logo from '../../assets/images/logo.png';
 
-const Navbar = ({ setAuth, children }) => {
+const Navbar = ({ children }) => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        setAuth(false);
+        localStorage.setItem('isAuth', 'false');
+        window.location.reload();
         navigate('/login');
     };
 
