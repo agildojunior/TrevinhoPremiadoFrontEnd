@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     Bilhete, BilheteLeft, BilheteRight, DataContainer, NumberContainer, DataItem, Title, Value, NumberTitle, LogoContainer,
     NumberValue, NumberTopLeft, NumberTopRight, NumberBottomLeft, NumberBottomRight, FooterText, BilhetesContainer, 
-    FloatingButton, ModalOverlay, ModalContent, CloseButton, Form, Label, Input, SubmitButton, Select
+    FloatingButton, ModalOverlay, ModalContent, CloseButton, Form, Label, Input, SubmitButton, Select, FloatingButtonLeft
 } from './styles';
 import logo from '../../assets/images/logo.png';
 import axiosInstance from '../../axiosInstance';
 
 const Vender = () => {
+    const navigate = useNavigate(); 
     const [bilhetes, setBilhetes] = useState([]);
     const [selectedBilhetes, setSelectedBilhetes] = useState(new Set());
     const [modalOpen, setModalOpen] = useState(false);
@@ -104,6 +106,10 @@ const Vender = () => {
         }
     };
 
+    const handleUltimaVendaClick = () => {
+        navigate('/ultimaVenda'); // Navegar para a rota /ultimaVenda
+    };
+
     return (
         <>
             {!pessoa ? (
@@ -190,6 +196,7 @@ const Vender = () => {
                         ))}
                     </BilhetesContainer>
                     <FloatingButton onClick={toggleModal}>Finalizar Compra</FloatingButton>
+                    <FloatingButtonLeft onClick={handleUltimaVendaClick}>Última Venda</FloatingButtonLeft>
                     <ModalOverlay open={modalOpen}>
                         <ModalContent>
                             <h2>Deseja finalizar esta compra?</h2>

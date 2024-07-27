@@ -269,3 +269,22 @@ export const Select = styled.select`
     border-radius: 4px;
     font-size: 1rem;
 `;
+
+export const FloatingButtonLeft = styled.button`
+    position: fixed;
+    bottom: 20px;
+    left: 20px; /* Posiciona o botão à esquerda */
+    padding: 10px 20px;
+    background-color: #004080;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+
+    &:hover {
+        background-color: #003366;
+    }
+`;

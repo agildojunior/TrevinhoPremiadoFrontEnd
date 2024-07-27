@@ -13,6 +13,7 @@ import EditarUnidade from '../pages/EditarUnidade';
 import Bilhetes from '../pages/Bilhetes';
 import Caixas from '../pages/Caixas';
 import Relatorios from '../pages/Relatorios';
+import UltimaVenda from '../pages/UltimaVenda';
 
 const RoutesApp = () => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -84,7 +85,10 @@ const RoutesApp = () => {
                 );
             case 5: // Vendedor
                 return (
-                    <Route path="/vender" element={<Vender />} />
+                    <>
+                        <Route path="/vender" element={<Vender />} />
+                        <Route path="/ultimaVenda" element={<UltimaVenda />} />
+                    </>
                 );
             default:
                 return <Route path="*" element={<Navigate to="/login" />} />;
