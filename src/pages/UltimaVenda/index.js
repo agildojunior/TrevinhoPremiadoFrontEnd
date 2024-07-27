@@ -25,15 +25,29 @@ const printStyles = `
 
 const UltimaVenda = () => {
     const [bilhetes, setBilhetes] = useState([]);
+    const [pessoa, setPessoa] = useState(null);
+    const [loading, setLoading] = useState(true); // Adicionado estado de carregamento
     const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
         const fetchUltimaTransacao = async () => {
             try {
+                // Buscar bilhetes da última transação
                 const response = await axiosInstance.get(`/Bilhetes/ultima-transacao/${user.id}`);
-                setBilhetes(response.data || []); 
+                setBilhetes(response.data || []);
+
+                // Verificar se há bilhetes retornados
+                if (response.data.length > 0) {
+                    const bilheteId = response.data[0].id;
+
+                    // Buscar pessoa com base no ID do bilhete
+                    const response2 = await axiosInstance.get(`/bilhetes/pessoa-do-bilhete/${bilheteId}`);
+                    setPessoa(response2.data || null);
+                }
             } catch (error) {
                 console.error('Erro ao buscar bilhetes da última transação:', error);
+            } finally {
+                setLoading(false); // Definir carregamento como false após as operações
             }
         };
 
@@ -41,10 +55,10 @@ const UltimaVenda = () => {
     }, [user.id]);
 
     useEffect(() => {
-        if (bilhetes.length > 0) {
+        if (!loading && bilhetes.length > 0) { // Verificar se não está carregando e bilhetes existem
             handlePrint();
         }
-    }, [bilhetes]);
+    }, [bilhetes, loading]);
 
     const getCurrentDate = () => {
         const today = new Date();
@@ -75,15 +89,15 @@ const UltimaVenda = () => {
                             </DataItem>
                             <DataItem>
                                 <Title>NOME</Title>
-                                <Value>...</Value>
+                                <Value>{pessoa ? pessoa.nome : '...'}</Value>
                             </DataItem>
                             <DataItem>
                                 <Title>CONTATO</Title>
-                                <Value>...</Value>
+                                <Value>{pessoa ? pessoa.contato : '...'}</Value>
                             </DataItem>
                             <DataItem>
                                 <Title>ENDEREÇO</Title>
-                                <Value>...</Value>
+                                <Value>{pessoa ? pessoa.endereco : '...'}</Value>
                             </DataItem>
                             <DataItem>
                                 <Title>VENDEDOR</Title>
