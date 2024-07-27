@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../axiosInstance';
 import {
-    Bilhete, BilheteLeft, BilheteRight, DataContainer, NumberContainer, DataItem, Title, Value, NumberTitle, PrintButton,
+    Bilhete, BilheteLeft, BilheteRight, DataContainer, NumberContainer, DataItem, Title, Value, NumberTitle,
     NumberValue, LogoContainer, BilhetesContainer, NumberTopLeft, NumberTopRight, NumberBottomLeft, NumberBottomRight, FooterText
 } from './styles';
 import logo from '../../assets/images/logo.png';
@@ -40,6 +40,12 @@ const UltimaVenda = () => {
         fetchUltimaTransacao();
     }, [user.id]);
 
+    useEffect(() => {
+        if (bilhetes.length > 0) {
+            handlePrint();
+        }
+    }, [bilhetes]);
+
     const getCurrentDate = () => {
         const today = new Date();
         return today.toLocaleDateString('pt-BR');
@@ -58,65 +64,62 @@ const UltimaVenda = () => {
     };
 
     return (
-        <>
-            <PrintButton onClick={handlePrint}>Imprimir Bilhetes</PrintButton>
-            <BilhetesContainer className="printableArea">
-                {bilhetes.map((bilhete) => (
-                    <Bilhete key={bilhete.id}>
-                        <BilheteLeft>
-                            <DataContainer>
-                                <DataItem>
-                                    <Title>ID</Title>
-                                    <Value>{bilhete.id}</Value>
-                                </DataItem>
-                                <DataItem>
-                                    <Title>NOME</Title>
-                                    <Value>...</Value>
-                                </DataItem>
-                                <DataItem>
-                                    <Title>CONTATO</Title>
-                                    <Value>...</Value>
-                                </DataItem>
-                                <DataItem>
-                                    <Title>ENDEREÇO</Title>
-                                    <Value>...</Value>
-                                </DataItem>
-                                <DataItem>
-                                    <Title>VENDEDOR</Title>
-                                    <Value>{user.username}</Value>
-                                </DataItem>
-                            </DataContainer>
-                        </BilheteLeft>
-                        <BilheteRight>
-                            <NumberContainer>
-                                <NumberTopLeft>
-                                    <NumberTitle>Nº 01</NumberTitle>
-                                    <NumberValue>{bilhete.num_01 || '...'}</NumberValue>
-                                </NumberTopLeft>
-                                <NumberTopRight>
-                                    <NumberTitle>Nº 02</NumberTitle>
-                                    <NumberValue>{bilhete.num_02 || '...'}</NumberValue>
-                                </NumberTopRight>
-                                <LogoContainer>
-                                    <img src={logo} alt="Logo" />
-                                </LogoContainer>
-                                <NumberBottomLeft>
-                                    <NumberTitle>Nº 03</NumberTitle>
-                                    <NumberValue>{bilhete.num_03 || '...'}</NumberValue>
-                                </NumberBottomLeft>
-                                <NumberBottomRight>
-                                    <NumberTitle>EXTRA</NumberTitle>
-                                    <NumberValue>...</NumberValue>
-                                </NumberBottomRight>
-                            </NumberContainer>
-                            <FooterText>
-                                {getCurrentDate()}
-                            </FooterText>
-                        </BilheteRight>
-                    </Bilhete>
-                ))}
-            </BilhetesContainer>
-        </>
+        <BilhetesContainer className="printableArea">
+            {bilhetes.map((bilhete) => (
+                <Bilhete key={bilhete.id}>
+                    <BilheteLeft>
+                        <DataContainer>
+                            <DataItem>
+                                <Title>ID</Title>
+                                <Value>{bilhete.id}</Value>
+                            </DataItem>
+                            <DataItem>
+                                <Title>NOME</Title>
+                                <Value>...</Value>
+                            </DataItem>
+                            <DataItem>
+                                <Title>CONTATO</Title>
+                                <Value>...</Value>
+                            </DataItem>
+                            <DataItem>
+                                <Title>ENDEREÇO</Title>
+                                <Value>...</Value>
+                            </DataItem>
+                            <DataItem>
+                                <Title>VENDEDOR</Title>
+                                <Value>{user.username}</Value>
+                            </DataItem>
+                        </DataContainer>
+                    </BilheteLeft>
+                    <BilheteRight>
+                        <NumberContainer>
+                            <NumberTopLeft>
+                                <NumberTitle>Nº 01</NumberTitle>
+                                <NumberValue>{bilhete.num_01 || '...'}</NumberValue>
+                            </NumberTopLeft>
+                            <NumberTopRight>
+                                <NumberTitle>Nº 02</NumberTitle>
+                                <NumberValue>{bilhete.num_02 || '...'}</NumberValue>
+                            </NumberTopRight>
+                            <LogoContainer>
+                                <img src={logo} alt="Logo" />
+                            </LogoContainer>
+                            <NumberBottomLeft>
+                                <NumberTitle>Nº 03</NumberTitle>
+                                <NumberValue>{bilhete.num_03 || '...'}</NumberValue>
+                            </NumberBottomLeft>
+                            <NumberBottomRight>
+                                <NumberTitle>EXTRA</NumberTitle>
+                                <NumberValue>...</NumberValue>
+                            </NumberBottomRight>
+                        </NumberContainer>
+                        <FooterText>
+                            {getCurrentDate()}
+                        </FooterText>
+                    </BilheteRight>
+                </Bilhete>
+            ))}
+        </BilhetesContainer>
     );
 };
 

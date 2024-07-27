@@ -99,7 +99,9 @@ const Vender = () => {
             await axiosInstance.post(`/Caixas/processar-venda`, null, { params });
             
             alert('Venda processada com sucesso!');
-            window.location.reload();
+            setTimeout(() => {
+                navigate('/ultimaVenda');
+            }, 1000);
         } catch (error) {
             console.error('Erro ao processar venda:', error);
             alert('Erro ao processar venda.');

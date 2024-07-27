@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const BilhetesContainer = styled.div`
-    padding: 30px 0;
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -159,7 +158,7 @@ export const PrintButton = styled.button`
     margin: 20px;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #007BFF;
+    background-color: #194e92;
     color: white;
     border: none;
     border-radius: 5px;
