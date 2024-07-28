@@ -7,21 +7,22 @@ export const BilhetesContainer = styled.div`
 `;
 
 export const Bilhete = styled.div`
+    margin-top: 100px;
     display: flex;
     border: 1px solid black;
-    width: 300px;
-    height: 150px;
+    width: 250px;
+    height: 142px;
     padding: 5px;
     box-sizing: border-box;
     font-size: 10px;
-    position: relative;
     cursor: pointer;
     background-color: #f9f9f9; 
+    transform: rotate(90deg);
 `;
 
 export const BilheteLeft = styled.div`
-    flex: 1;
     display: flex;
+    width: 40%;
     flex-direction: column;
     padding-right: 5px;
     overflow: hidden;
@@ -30,6 +31,7 @@ export const BilheteLeft = styled.div`
 export const BilheteRight = styled.div`
     flex: 1;
     display: flex;
+    width: 60%;
     flex-direction: column;
     position: relative;
     overflow: hidden;
@@ -68,11 +70,11 @@ export const NumberItem = styled.div`
 
 export const Title = styled.div`
     font-weight: bold;
-    margin-bottom: 1px;
     font-size: 8px;
 `;
 
 export const Value = styled.div`
+    font-weight: bold;
     border: 1px solid black;
     padding: 2px;
     box-sizing: border-box;
@@ -90,6 +92,7 @@ export const NumberTitle = styled.div`
 `;
 
 export const NumberValue = styled.div`
+    font-weight: bold;
     border: 1px solid black;
     padding: 4px;
     box-sizing: border-box;
@@ -127,12 +130,13 @@ export const NumberBottomRight = styled(NumberItem)`
 `;
 
 export const FooterText = styled.div`
+    font-weight: bold;
     position: absolute;
     bottom: 5px;
     left: 5px;
     right: 5px;
     text-align: center;
-    font-size: 6px;
+    font-size: 8px;
     color: #333;
 `;
 

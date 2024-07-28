@@ -26,28 +26,26 @@ const printStyles = `
 const UltimaVenda = () => {
     const [bilhetes, setBilhetes] = useState([]);
     const [pessoa, setPessoa] = useState(null);
-    const [loading, setLoading] = useState(true); // Adicionado estado de carregamento
+    const [loading, setLoading] = useState(true); 
     const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
         const fetchUltimaTransacao = async () => {
             try {
-                // Buscar bilhetes da última transação
                 const response = await axiosInstance.get(`/Bilhetes/ultima-transacao/${user.id}`);
                 setBilhetes(response.data || []);
 
-                // Verificar se há bilhetes retornados
                 if (response.data.length > 0) {
                     const bilheteId = response.data[0].id;
 
-                    // Buscar pessoa com base no ID do bilhete
+                    
                     const response2 = await axiosInstance.get(`/bilhetes/pessoa-do-bilhete/${bilheteId}`);
                     setPessoa(response2.data || null);
                 }
             } catch (error) {
                 console.error('Erro ao buscar bilhetes da última transação:', error);
             } finally {
-                setLoading(false); // Definir carregamento como false após as operações
+                setLoading(false); 
             }
         };
 
@@ -55,7 +53,7 @@ const UltimaVenda = () => {
     }, [user.id]);
 
     useEffect(() => {
-        if (!loading && bilhetes.length > 0) { // Verificar se não está carregando e bilhetes existem
+        if (!loading && bilhetes.length > 0) {
             handlePrint();
         }
     }, [bilhetes, loading]);
