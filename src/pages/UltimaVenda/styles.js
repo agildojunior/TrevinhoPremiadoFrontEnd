@@ -172,3 +172,28 @@ export const PrintButton = styled.button`
         background-color: #0056b3;
     }
 `;
+
+export const ComprovanteContainer = styled.div`
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: Right; 
+    width: 142px;
+`;
+
+export const ComprovanteItem = styled.div`
+    display: flex;
+    box-sizing: border-box;
+    font-size: 9px;
+    justify-content: space-between
+`;
+
+export const ComprovanteTitle = styled.div`
+    font-weight: bold;
+    font-size: 9px;
+`;
+
+export const ComprovanteValue = styled.div`
+    font-weight: bold;
+    font-size: 9px;
+`;
