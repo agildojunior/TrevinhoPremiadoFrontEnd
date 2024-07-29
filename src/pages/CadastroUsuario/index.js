@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../axiosInstance';
 import { CadastroForm, Input, Select, Button } from './styles';
 import { toast } from 'react-toastify';
+import InputMask from 'react-input-mask';
 
 const CadastroUsuario = () => {
     const [user, setUser] = useState('');
@@ -154,13 +155,14 @@ const CadastroUsuario = () => {
                 placeholder="Data de Nascimento"
                 required
             />
-            <Input
-                type="text"
+            <InputMask
+                mask="(99) 99999-9999"
                 value={contatoPessoa}
                 onChange={(e) => setContatoPessoa(e.target.value)}
                 placeholder="Contato"
-                required
-            />
+            >
+                {(inputProps) => <Input {...inputProps} type="text" required />}
+            </InputMask>
             <Input
                 type="text"
                 value={enderecoPessoa}

@@ -68,9 +68,9 @@ const Caixas = () => {
                                 <tr key={caixa.caixaId}>
                                     <Td>{caixa.vendedorNome}</Td>
                                     <Td>{new Date(caixa.data_Abertura).toLocaleDateString()}</Td>
-                                    <Td>{caixa.valor_Total !== undefined ? caixa.valor_Total.toFixed(2) : '0.00'}</Td>
-                                    <Td>{caixa.pix !== undefined ? caixa.pix.toFixed(2) : '0.00'}</Td>
-                                    <Td>{caixa.dinheiro !== undefined ? caixa.dinheiro.toFixed(2) : '0.00'}</Td>
+                                    <Td>R$ {caixa.valor_Total !== undefined ? caixa.valor_Total.toFixed(2) : '0.00'}</Td>
+                                    <Td>R$ {caixa.pix !== undefined ? caixa.pix.toFixed(2) : '0.00'}</Td>
+                                    <Td>R$ {caixa.dinheiro !== undefined ? caixa.dinheiro.toFixed(2) : '0.00'}</Td>
                                     <Td>
                                         <Button onClick={() => fecharCaixa(caixa.caixaId)}>Fechar Caixa</Button>
                                     </Td>

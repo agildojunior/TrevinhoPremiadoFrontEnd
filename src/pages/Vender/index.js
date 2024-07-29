@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import InputMask from 'react-input-mask';
 import {
     Bilhete, BilheteLeft, BilheteRight, DataContainer, NumberContainer, DataItem, Title, Value, NumberTitle, LogoContainer,
     NumberValue, NumberTopLeft, NumberTopRight, NumberBottomLeft, NumberBottomRight, FooterText, BilhetesContainer, 
@@ -127,7 +128,13 @@ const Vender = () => {
                     </Label>
                     <Label>
                         Telefone:
-                        <Input type="text" value={contato} onChange={(e) => setContato(e.target.value)} required />
+                        <InputMask
+                            mask="(99) 99999-9999"
+                            value={contato}
+                            onChange={(e) => setContato(e.target.value)}
+                        >
+                            {(inputProps) => <Input {...inputProps} type="text" required />}
+                        </InputMask>
                     </Label>
                     <Label>
                         Endereço:

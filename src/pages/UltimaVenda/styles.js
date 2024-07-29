@@ -136,7 +136,7 @@ export const FooterText = styled.div`
     left: 5px;
     right: 5px;
     text-align: center;
-    font-size: 8px;
+    font-size: 10px;
     color: #333;
 `;
 
