@@ -26,6 +26,7 @@ const printStyles = `
 const UltimaVenda = () => {
     const [bilhetes, setBilhetes] = useState([]);
     const [pessoa, setPessoa] = useState(null);
+    const [transacao, setTransacao] = useState(null);
     const [loading, setLoading] = useState(true); 
     const user = JSON.parse(localStorage.getItem('user'));
     const [quantidade, setQuantidade] = useState(0);
@@ -38,6 +39,10 @@ const UltimaVenda = () => {
                 const bilhetes = response.data || [];
                 setBilhetes(bilhetes);
                 setQuantidade(bilhetes.length);
+
+                const response3 = await axiosInstance.get(`/Transacoes/ultimaTransacao/${bilhetes[0].id}`);
+                setTransacao(response3.data || null);
+                console.log(response3.data);
     
                 const total = bilhetes.reduce((acc, bilhete) => acc + bilhete.valor, 0);
                 setValorTotal(total);
@@ -88,7 +93,7 @@ const UltimaVenda = () => {
                         <BilheteLeft>
                             <DataContainer>
                                 <DataItem>
-                                    <Title>ID</Title>
+                                    <Title>N/S</Title>
                                     <Value>{bilhete.id}</Value>
                                 </DataItem>
                                 <DataItem>
@@ -137,8 +142,7 @@ const UltimaVenda = () => {
                         </BilheteRight>
                     </Bilhete>
                 ))}
-            </BilhetesContainer>
-            <div style={{
+                <div style={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -158,10 +162,11 @@ const UltimaVenda = () => {
                     </ComprovanteItem>
                     <ComprovanteItem>
                         <ComprovanteTitle>Forma de Pagamento:</ComprovanteTitle>
-                        <ComprovanteValue>...</ComprovanteValue>
+                        <ComprovanteValue>{transacao ? transacao.metodo_Pagamento : '...'}</ComprovanteValue>
                     </ComprovanteItem>
                 </ComprovanteContainer>
             </div>
+            </BilhetesContainer>
         </>
     );
 };
