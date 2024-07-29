@@ -32,6 +32,11 @@ const UltimaVenda = () => {
     const [quantidade, setQuantidade] = useState(0);
     const [valorTotal, setValorTotal] = useState(0);
 
+    const truncateText = (text, length) => {
+        if (text.length <= length) return text;
+        return text.slice(0, length) + '...';
+    };
+
     useEffect(() => {
         const fetchUltimaTransacao = async () => {
             try {
@@ -106,7 +111,7 @@ const UltimaVenda = () => {
                                 </DataItem>
                                 <DataItem>
                                     <Title>ENDEREÇO</Title>
-                                    <Value>{pessoa ? pessoa.endereco : '...'}</Value>
+                                    <Value>{pessoa ? truncateText(pessoa.endereco, 20) : '...'}</Value>
                                 </DataItem>
                                 <DataItem>
                                     <Title>VENDEDOR</Title>
