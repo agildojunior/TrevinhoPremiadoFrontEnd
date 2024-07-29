@@ -154,6 +154,9 @@ const UltimaVenda = () => {
             }}>
                 <ComprovanteContainer>
                     <ComprovanteItem>
+                        <ComprovanteTitle>Recibo</ComprovanteTitle>
+                    </ComprovanteItem>
+                    <ComprovanteItem>
                         <ComprovanteTitle>Quantidade de Bilhetes:</ComprovanteTitle>
                         <ComprovanteValue>{quantidade}</ComprovanteValue>
                     </ComprovanteItem>
