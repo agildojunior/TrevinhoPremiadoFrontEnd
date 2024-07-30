@@ -14,6 +14,7 @@ import Bilhetes from '../pages/Bilhetes';
 import Caixas from '../pages/Caixas';
 import Relatorios from '../pages/Relatorios';
 import UltimaVenda from '../pages/UltimaVenda';
+import BuscarGanhador from '../pages/BuscarGanhador';
 
 const RoutesApp = () => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -40,6 +41,7 @@ const RoutesApp = () => {
                         <Route path="/bilhetes/:id" element={<Bilhetes />} />
                         <Route path="/caixas/:id" element={<Caixas />} />
                         <Route path="/relatorios" element={<Relatorios />} />
+                        <Route path="/buscarGanhador" element={<BuscarGanhador />} />
                     </>
                 );
             case 2: // Suporte
@@ -56,6 +58,7 @@ const RoutesApp = () => {
                         <Route path="/bilhetes/:id" element={<Bilhetes />} />
                         <Route path="/caixas/:id" element={<Caixas />} />
                         <Route path="/relatorios" element={<Relatorios />} />
+                        <Route path="/buscarGanhador" element={<BuscarGanhador />} />
                     </>
                 );
             case 3: // Gestor
@@ -69,6 +72,7 @@ const RoutesApp = () => {
                         <Route path="/bilhetes/:id" element={<Bilhetes />} />
                         <Route path="/caixas/:id" element={<Caixas />} />
                         <Route path="/relatorios" element={<Relatorios />} />
+                        <Route path="/buscarGanhador" element={<BuscarGanhador />} />
                     </>
                 );
             case 4: // Coordenador
@@ -81,6 +85,7 @@ const RoutesApp = () => {
                         <Route path="/bilhetes/:id" element={<Bilhetes />} />
                         <Route path="/caixas/:id" element={<Caixas />} />
                         <Route path="/relatorios" element={<Relatorios />} />
+                        <Route path="/buscarGanhador" element={<BuscarGanhador />} />
                     </>
                 );
             case 5: // Vendedor
